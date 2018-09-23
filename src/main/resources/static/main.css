@@ -1,0 +1,101 @@
+
+
+ * {
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: Arial, Helvetica, sans-serif;
+
+ }
+
+
+ .header {
+     background-color: #0099BB;
+     padding: 4px;
+
+     font-size: 35px;
+     margin: 0 0 6px 0;
+
+ }
+
+ .header h2 {
+     padding-left: 8px;
+     color: #f9f9ff;
+ }
+
+ .sidenav {
+
+     width: 200px;
+     position: fixed;
+     z-index: 1;
+
+
+     overflow-x: hidden;
+     padding-top: 20px;
+ }
+
+
+
+
+ #main {
+     margin-left: 230px;
+     /* Same as the width of the sidenav */
+     padding-top: 20px;
+     padding-bottom: 8px;
+ }
+
+ .tab {
+     border-radius: 4px;
+     background-color: #0099BB;
+     border: none;
+     color: #f9f9ff;
+     text-align: center;
+     font-size: 20px;
+     padding: 20px;
+     width: 200px;
+     transition: all 0.5s;
+     cursor: pointer;
+     margin: 5px;
+     height: 90px;
+ }
+
+ .tab span {
+     cursor: pointer;
+     display: inline-block;
+     position: relative;
+     transition: 0.5s;
+ }
+
+ .tab span:after {
+     content: '\00bb';
+     position: absolute;
+     opacity: 0;
+     top: 0;
+     right: -20px;
+     transition: 0.5s;
+ }
+
+ .tab:hover span {
+     padding-right: 25px;
+ }
+
+ .tab:hover span:after {
+     opacity: 1;
+     right: 0;
+ }
+
+
+ @media screen and (max-height: 450px) {
+     .sidenav {
+         padding-top: 15px;
+
+     }
+     .sidenav a {
+         font-size: 18px;
+     }
+ }
+ 
+ .hidden {
+ 	display: none;
+ }

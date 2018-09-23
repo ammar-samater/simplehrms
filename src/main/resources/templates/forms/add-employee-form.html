@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container">
+	<form action="/departments" method="post">
+		<div class="row">
+			<div class="col-25">
+				<label for="employee_number">Employee Number</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="employee_number" name="employeeNumber">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="first_name">First Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="first_name" name="firstName">
+			</div>
+			<div class="col-25">
+				<label for="first_name_lang2">الإسم الأول</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="first_name_lang2" name="firstNameLang2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="mid_name">Middle Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="mid_name" name="midName">
+			</div>
+			<div class="col-25">
+				<label for="mid_name_lang2">إسم الأب</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="mid_name_lang2" name="midNameLang2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="last_name">Last Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="last_name" name="lastName">
+			</div>
+			<div class="col-25">
+				<label for="last_name_lang2">إسم العائلة</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="last_name_lang2" name="lastNameLang2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="preferred_name">Preferred Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="preferred_name" name="preferredName">
+			</div>
+			<div class="col-25">
+				<label for="preferred_name_lang2">الاسم المفضل</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="preferred_name_lang2" name="preferredNameLang2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="dob">Preferred Name</label>
+			</div>
+			<div class="col-75">
+				<input type="date" id="dob" name="dob">
+			</div>
+		</div>
+<!-- 		<div class="row">
+			<div class="col-25">
+				<label for="department_name">Department</label>
+			</div>
+			<div class="col-75">
+				<select id="department" name="department.id">
+					<option value="" disabled selected>Select the department</option>
+					<option th:each="department : ${departments}" th:value="${department.id}"
+						th:utext="${department.name}" />
+				</select>
+			</div>
+		</div> -->
+		<div class="row">
+			<input type="submit" value="Submit">
+		</div>
+	</form>
+</div>
+</html>

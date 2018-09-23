@@ -1,0 +1,67 @@
+
+<div class="container">
+	<form action="/departments" method = "post" id="add-site-form">
+		<div class="row">
+			<div class="col-25">
+				<label for="name">Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="name" name="name">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="nameLang2">الإسم</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="nameLang2" name="nameLang2">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="unitNumber">Unit Number</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="unitNumber" name="unitNumber">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="streetNumber">Street Number</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="streetNumber" name="streetNumber">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="streetName">Street Name</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="streetName" name="streetName">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="city">City</label>
+			</div>
+			<div class="col-75">
+				<select form="add-site-form" type="text" id="city" name="city">
+					<option value="-1" selected disabled>Select a city</option>
+					<option th:each="city : ${cities}" th:value="${city.id}"  th:text="city.name"></option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="lname">Office Number</label>
+			</div>
+			<div class="col-75">
+				<input type="text" id="lname" name="lastname">
+			</div>
+		</div>
+		<div class="row">
+			<input type="submit" value="Submit">
+		</div>
+	</form>
+</div>

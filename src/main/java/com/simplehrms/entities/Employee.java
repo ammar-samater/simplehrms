@@ -11,10 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -58,15 +56,16 @@ public class Employee implements Serializable {
 	@Column(name = "last_name_lang2")
 	private String lastNameLang2;
 
-	@Column(name = "preferd_name")
-	private String preferdName;
+	@Column(name = "preferred_name")
+	private String preferredName;
 
-	@Column(name = "preferd_name_lang2")
-	private String preferdNameLang2;
+	@Column(name = "preferred_name_lang2")
+	private String preferredNameLang2;
 
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 
+	@Column
 	private String gender;
 
 	@Temporal(TemporalType.DATE)
@@ -84,6 +83,8 @@ public class Employee implements Serializable {
 	@JoinColumn(name = "employee_id")
 	private List<EmployeePosition> employeePositions;
 
+
+
 	public Employee() {
 	}
 
@@ -95,8 +96,8 @@ public class Employee implements Serializable {
 	 * @param firstNameLang2
 	 * @param midNameLang2
 	 * @param lastNameLang2
-	 * @param preferdName
-	 * @param preferdNameLang2
+	 * @param preferredName
+	 * @param preferredNameLang2
 	 * @param dob
 	 * @param gender
 	 * @param hireDate
@@ -105,7 +106,7 @@ public class Employee implements Serializable {
 	 * @param religionLang2
 	 */
 	public Employee(String employeeNumber, String firstName, String midName, String lastName, String firstNameLang2,
-			String midNameLang2, String lastNameLang2, String preferdName, String preferdNameLang2, Date dob,
+			String midNameLang2, String lastNameLang2, String preferredName, String preferredNameLang2, Date dob,
 			String gender, Date hireDate, String martialStatus, String religion, String religionLang2) {
 		this.employeeNumber = employeeNumber;
 		this.firstName = firstName;
@@ -114,8 +115,8 @@ public class Employee implements Serializable {
 		this.firstNameLang2 = firstNameLang2;
 		this.midNameLang2 = midNameLang2;
 		this.lastNameLang2 = lastNameLang2;
-		this.preferdName = preferdName;
-		this.preferdNameLang2 = preferdNameLang2;
+		this.preferredName = preferredName;
+		this.preferredNameLang2 = preferredNameLang2;
 		this.dob = dob;
 		this.gender = gender;
 		this.hireDate = hireDate;
@@ -245,33 +246,33 @@ public class Employee implements Serializable {
 	}
 
 	/**
-	 * @return the preferdName
+	 * @return the preferredName
 	 */
-	public String getPreferdName() {
-		return preferdName;
+	public String getPreferredName() {
+		return preferredName;
 	}
 
 	/**
-	 * @param preferdName
-	 *            the preferdName to set
+	 * @param preferredName
+	 *            the preferredName to set
 	 */
-	public void setPreferdName(String preferdName) {
-		this.preferdName = preferdName;
+	public void setPreferredName(String preferredName) {
+		this.preferredName = preferredName;
 	}
 
 	/**
-	 * @return the preferdNameLang2
+	 * @return the preferredNameLang2
 	 */
-	public String getPreferdNameLang2() {
-		return preferdNameLang2;
+	public String getPreferredNameLang2() {
+		return preferredNameLang2;
 	}
 
 	/**
-	 * @param preferdNameLang2
-	 *            the preferdNameLang2 to set
+	 * @param preferredNameLang2
+	 *            the preferredNameLang2 to set
 	 */
-	public void setPreferdNameLang2(String preferdNameLang2) {
-		this.preferdNameLang2 = preferdNameLang2;
+	public void setPreferredNameLang2(String preferredNameLang2) {
+		this.preferredNameLang2 = preferredNameLang2;
 	}
 
 	/**

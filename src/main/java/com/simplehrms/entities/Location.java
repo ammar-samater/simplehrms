@@ -38,32 +38,31 @@ public class Location implements Serializable {
 	@Column(name = "floor_number")
 	private Integer floorNumber;
 
-	@Column(name = "buildingName")
-	private String BuildingName;
+	@Column(name = "building_name")
+	private String buildingName;
 
 	@ManyToOne
-	@JoinColumn(name = "address_id")
-	private Address address;
+	@JoinColumn(name = "site_id")
+	private Site site;
 
 	/**
 	 * 
 	 */
 	public Location() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param officeNumber
 	 * @param floorNumber
 	 * @param buildingName
-	 * @param address
+	 * @param site
 	 */
-	public Location(String officeNumber, Integer floorNumber, String buildingName, Address address) {
+	public Location(String officeNumber, Integer floorNumber, String buildingName, Site site) {
 		this.officeNumber = officeNumber;
 		this.floorNumber = floorNumber;
-		BuildingName = buildingName;
-		this.address = address;
+		this.buildingName = buildingName;
+		this.site = site;
 	}
 
 	/**
@@ -115,7 +114,7 @@ public class Location implements Serializable {
 	 * @return the buildingName
 	 */
 	public String getBuildingName() {
-		return BuildingName;
+		return buildingName;
 	}
 
 	/**
@@ -123,22 +122,22 @@ public class Location implements Serializable {
 	 *            the buildingName to set
 	 */
 	public void setBuildingName(String buildingName) {
-		BuildingName = buildingName;
+		buildingName = buildingName;
 	}
 
 	/**
-	 * @return the address
+	 * @return the site
 	 */
-	public Address getAddress() {
-		return address;
+	public Site getSite() {
+		return site;
 	}
 
 	/**
-	 * @param address
-	 *            the address to set
+	 * @param site
+	 *            the site to set
 	 */
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	/**
@@ -191,7 +190,7 @@ public class Location implements Serializable {
 	@Override
 	public String toString() {
 		return "Location [id=" + id + ", officeNumber=" + officeNumber + ", floorNumber=" + floorNumber
-				+ ", BuildingName=" + BuildingName + ", address=" + address + "]";
+				+ ", BuildingName=" + buildingName + ", site=" + site + "]";
 	}
 
 }

@@ -44,7 +44,6 @@ public class Address implements Serializable {
 	 */
 	public Address() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

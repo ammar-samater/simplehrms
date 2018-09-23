@@ -1,56 +1,66 @@
+/**
+ * 
+ */
 package com.simplehrms.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
- * The persistent class for the city database table.
+ * The persistent class for the site database table.
  * 
  * @author Ammar Samater
- * @author
+ * 
  */
 @Entity
-@Table(name = "city")
-@NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
-public class City implements Serializable {
+@Table(name = "site")
+@NamedQuery(name = "Site.findAll", query = "SELECT s FROM Site s")
+public class Site implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
 	private Long id;
 
+	@Column(name = "name")
 	private String name;
 
-	@Column(name = "name_lang2")
+	@Column(name = "nameLang2")
 	private String nameLang2;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "country_code")
-	private Country country;
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "address_id")
+	private Address address;
 
-	public City() {
+	/**
+	 * 
+	 */
+	public Site() {
+		super();
 	}
 
 	/**
+	 * @param id
 	 * @param name
 	 * @param nameLang2
-	 * @param country
+	 * @param address
 	 */
-	public City(String name, String nameLang2, Country country) {
+	public Site(Long id, String name, String nameLang2, Address address) {
+		this.id = id;
 		this.name = name;
 		this.nameLang2 = nameLang2;
-		this.country = country;
+		this.address = address;
 	}
 
 	/**
@@ -99,19 +109,18 @@ public class City implements Serializable {
 	}
 
 	/**
-	 * @return the country
+	 * @return the address
 	 */
-	@JsonIgnore
-	public Country getCountry() {
-		return country;
+	public Address getAddress() {
+		return address;
 	}
 
 	/**
-	 * @param country
-	 *            the country to set
+	 * @param address
+	 *            the address to set
 	 */
-	public void setCountry(Country country) {
-		this.country = country;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	/**
@@ -130,7 +139,6 @@ public class City implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -148,12 +156,7 @@ public class City implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		City other = (City) obj;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
+		Site other = (Site) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -169,7 +172,7 @@ public class City implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", name=" + name + ", nameLang2=" + nameLang2 + ", country=" + country + "]";
+		return "Site [id=" + id + ", name=" + name + ", nameLang2=" + nameLang2 + ", address=" + address + "]";
 	}
 
 }

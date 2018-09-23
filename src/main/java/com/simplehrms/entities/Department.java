@@ -21,29 +21,60 @@ public class Department implements Serializable {
 	private Long id;
 
 	@Column(name = "department_id", unique = true)
-	private String DepartmentId;
+	private String departmentId;
 
 	private String name;
 
 	private String nameLang2;
 
+	@Column(name = "office_number")
+	private String officeNumber;
+
+	@Column(name = "floor_number")
+	private Integer floorNumber;
+
+	@Column(name = "building_name")
+	private String buildingName;
+
 	@ManyToOne
-	@JoinColumn(name = "location_id")
-	private Location location;
+	@JoinColumn(name = "site_id")
+	private Site site;
 
 	public Department() {
 	}
 
 	/**
+	 * @param id
+	 */
+	public Department(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param departmentId
+	 */
+	public Department(String departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	/**
+	 * @param departmentId
 	 * @param name
 	 * @param nameLang2
-	 * @param location
+	 * @param officeNumber
+	 * @param floorNumber
+	 * @param buildingName
+	 * @param site
 	 */
-	public Department(String DepartmentId, String name, String nameLang2, Location location) {
-		this.DepartmentId = DepartmentId;
+	public Department(String departmentId, String name, String nameLang2, String officeNumber, Integer floorNumber,
+			String buildingName, Site site) {
+		this.departmentId = departmentId;
 		this.name = name;
 		this.nameLang2 = nameLang2;
-		this.location = location;
+		this.officeNumber = officeNumber;
+		this.floorNumber = floorNumber;
+		this.buildingName = buildingName;
+		this.site = site;
 	}
 
 	/**
@@ -65,7 +96,7 @@ public class Department implements Serializable {
 	 * @return the departmentId
 	 */
 	public String getDepartmentId() {
-		return DepartmentId;
+		return departmentId;
 	}
 
 	/**
@@ -73,7 +104,7 @@ public class Department implements Serializable {
 	 *            the departmentId to set
 	 */
 	public void setDepartmentId(String departmentId) {
-		DepartmentId = departmentId;
+		this.departmentId = departmentId;
 	}
 
 	/**
@@ -107,18 +138,63 @@ public class Department implements Serializable {
 	}
 
 	/**
-	 * @return the location
+	 * @return the officeNumber
 	 */
-	public Location getLocation() {
-		return location;
+	public String getOfficeNumber() {
+		return officeNumber;
 	}
 
 	/**
-	 * @param location
-	 *            the location to set
+	 * @param officeNumber
+	 *            the officeNumber to set
 	 */
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setOfficeNumber(String officeNumber) {
+		this.officeNumber = officeNumber;
+	}
+
+	/**
+	 * @return the floorNumber
+	 */
+	public Integer getFloorNumber() {
+		return floorNumber;
+	}
+
+	/**
+	 * @param floorNumber
+	 *            the floorNumber to set
+	 */
+	public void setFloorNumber(Integer floorNumber) {
+		this.floorNumber = floorNumber;
+	}
+
+	/**
+	 * @return the buildingName
+	 */
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	/**
+	 * @param buildingName
+	 *            the buildingName to set
+	 */
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
+	/**
+	 * @return the site
+	 */
+	public Site getSite() {
+		return site;
+	}
+
+	/**
+	 * @param site
+	 *            the site to set
+	 */
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	/**
@@ -170,8 +246,9 @@ public class Department implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", DepartmentId=" + DepartmentId + ", name=" + name + ", nameLang2=" + nameLang2
-				+ ", location=" + location + "]";
+		return "Department [id=" + id + ", departmentId=" + departmentId + ", name=" + name + ", nameLang2=" + nameLang2
+				+ ", officeNumber=" + officeNumber + ", floorNumber=" + floorNumber + ", buildingName=" + buildingName
+				+ ", site=" + site + "]";
 	}
 
 }
