@@ -2,15 +2,22 @@ package com.simplehrms.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -46,6 +53,18 @@ public class Position implements Serializable {
 	@Column(name = "max_salary")
 	private BigDecimal maxSalary;
 
+	@ElementCollection
+	@CollectionTable(name = "qualifications", joinColumns = @JoinColumn(name = "position_id"))
+	@Column(name = "required_qualifications")
+	private List<String> requiredQualifications;
+
+	@Column(name = "req_yrs_exp")
+	private double requiredYearsOfExperience;
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "positions_competencies", joinColumns = @JoinColumn(name = "position_id"), inverseJoinColumns = @JoinColumn(name = "Competence_id"))
+	private List<Competence> competencies;
+
 	@ManyToOne
 	@JoinColumn(name = "department_id")
 	private Department department;
@@ -54,23 +73,31 @@ public class Position implements Serializable {
 	}
 
 	/**
+	 * @param id
 	 * @param title
 	 * @param titleLang2
 	 * @param description
 	 * @param descriptionLang2
-	 * @param positionType
 	 * @param minSalary
 	 * @param maxSalary
+	 * @param requiredQualifications
+	 * @param requiredYearsOfExperience
+	 * @param competencies
 	 * @param department
 	 */
-	public Position(String title, String titleLang2, String description, String descriptionLang2,
-			 BigDecimal minSalary, BigDecimal maxSalary, Department department) {
+	public Position(int id, String title, String titleLang2, String description, String descriptionLang2,
+			BigDecimal minSalary, BigDecimal maxSalary, List<String> requiredQualifications,
+			double requiredYearsOfExperience, List<Competence> competencies, Department department) {
+		this.id = id;
 		this.title = title;
 		this.titleLang2 = titleLang2;
 		this.description = description;
 		this.descriptionLang2 = descriptionLang2;
 		this.minSalary = minSalary;
 		this.maxSalary = maxSalary;
+		this.requiredQualifications = requiredQualifications;
+		this.requiredYearsOfExperience = requiredYearsOfExperience;
+		this.competencies = competencies;
 		this.department = department;
 	}
 
@@ -149,7 +176,6 @@ public class Position implements Serializable {
 		this.descriptionLang2 = descriptionLang2;
 	}
 
-	
 	/**
 	 * @return the minSalary
 	 */
@@ -178,6 +204,51 @@ public class Position implements Serializable {
 	 */
 	public void setMaxSalary(BigDecimal maxSalary) {
 		this.maxSalary = maxSalary;
+	}
+
+	/**
+	 * @return the requiredQualifications
+	 */
+	public List<String> getRequiredQualifications() {
+		return requiredQualifications;
+	}
+
+	/**
+	 * @param requiredQualifications
+	 *            the requiredQualifications to set
+	 */
+	public void setRequiredQualifications(List<String> requiredQualifications) {
+		this.requiredQualifications = requiredQualifications;
+	}
+
+	/**
+	 * @return the requiredYearsOfExperience
+	 */
+	public double getRequiredYearsOfExperience() {
+		return requiredYearsOfExperience;
+	}
+
+	/**
+	 * @param requiredYearsOfExperience
+	 *            the requiredYearsOfExperience to set
+	 */
+	public void setRequiredYearsOfExperience(double requiredYearsOfExperience) {
+		this.requiredYearsOfExperience = requiredYearsOfExperience;
+	}
+
+	/**
+	 * @return the competencies
+	 */
+	public List<Competence> getCompetencies() {
+		return competencies;
+	}
+
+	/**
+	 * @param competencies
+	 *            the competencies to set
+	 */
+	public void setCompetencies(List<Competence> competencies) {
+		this.competencies = competencies;
 	}
 
 	/**
@@ -242,8 +313,9 @@ public class Position implements Serializable {
 	@Override
 	public String toString() {
 		return "Position [id=" + id + ", title=" + title + ", titleLang2=" + titleLang2 + ", description=" + description
-				+ ", descriptionLang2=" + descriptionLang2 + ", minSalary="
-				+ minSalary + ", maxSalary=" + maxSalary + ", department=" + department + "]";
+				+ ", descriptionLang2=" + descriptionLang2 + ", minSalary=" + minSalary + ", maxSalary=" + maxSalary
+				+ ", requiredQualifications=" + requiredQualifications + ", requiredYearsOfExperience="
+				+ requiredYearsOfExperience + ", competencies=" + competencies + ", department=" + department + "]";
 	}
 
 }

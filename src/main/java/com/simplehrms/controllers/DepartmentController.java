@@ -61,7 +61,7 @@ public class DepartmentController {
 		return "/departments/" + department.getId();
 	}
 	
-	@GetMapping(path="/departments/add")
+	@GetMapping(path="/departments/create")
 	public String getAddDepartmentForm(Map<String, Object> model) {
 		model.put("sites", siteRepository.findAll());
 		return "forms/add-department-form";

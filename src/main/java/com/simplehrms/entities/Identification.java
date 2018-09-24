@@ -3,7 +3,7 @@ package com.simplehrms.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-
+// hussain 
 /**
  * The persistent class for the identification database table.
  * 
@@ -22,9 +22,12 @@ public class Identification implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	private Employee employee;
+	
+	
+	private IdentificationType identificationType;
 
-	@Column(name = "passport_number", nullable = false)
-	private String passportNumber;
+	@Column(name = "identification_number", nullable = false)  
+	private String identificationNumber;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_of_issue", nullable = false)
@@ -48,24 +51,31 @@ public class Identification implements Serializable {
 	}
 
 	/**
+	 * @param id
 	 * @param employee
-	 * @param passportNumber
+	 * @param identificationType
+	 * @param identificationNumber
 	 * @param dateOfIssue
 	 * @param dateOfExpiration
 	 * @param placeOfIssue
 	 * @param nationality
 	 * @param profession
 	 */
-	public Identification(Employee employee, String passportNumber, Date dateOfIssue, Date dateOfExpiration,
-			City placeOfIssue, Country nationality, String profession) {
+	public Identification(Long id, Employee employee, IdentificationType identificationType,
+			String identificationNumber, Date dateOfIssue, Date dateOfExpiration, City placeOfIssue,
+			Country nationality, String profession) {
+		this.id = id;
 		this.employee = employee;
-		this.passportNumber = passportNumber;
+		this.identificationType = identificationType;
+		this.identificationNumber = identificationNumber;
 		this.dateOfIssue = dateOfIssue;
 		this.dateOfExpiration = dateOfExpiration;
 		this.placeOfIssue = placeOfIssue;
 		this.nationality = nationality;
 		this.profession = profession;
 	}
+	
+	
 
 	/**
 	 * @return the id
@@ -96,17 +106,31 @@ public class Identification implements Serializable {
 	}
 
 	/**
-	 * @return the passportNumber
+	 * @return the identificationType
 	 */
-	public String getPassportNumber() {
-		return passportNumber;
+	public IdentificationType getIdentificationType() {
+		return identificationType;
 	}
 
 	/**
-	 * @param passportNumber the passportNumber to set
+	 * @param identificationType the identificationType to set
 	 */
-	public void setPassportNumber(String passportNumber) {
-		this.passportNumber = passportNumber;
+	public void setIdentificationType(IdentificationType identificationType) {
+		this.identificationType = identificationType;
+	}
+
+	/**
+	 * @return the identificationNumber
+	 */
+	public String getIdentificationNumber() {
+		return identificationNumber;
+	}
+
+	/**
+	 * @param identificationNumber the identificationNumber to set
+	 */
+	public void setIdentificationNumber(String identificationNumber) {
+		this.identificationNumber = identificationNumber;
 	}
 
 	/**
@@ -222,9 +246,12 @@ public class Identification implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Identification [id=" + id + ", employee=" + employee + ", passportNumber=" + passportNumber
-				+ ", dateOfIssue=" + dateOfIssue + ", dateOfExpiration=" + dateOfExpiration + ", placeOfIssue="
-				+ placeOfIssue + ", nationality=" + nationality + ", profession=" + profession + "]";
+		return "Identification [id=" + id + ", employee=" + employee + ", identificationType=" + identificationType
+				+ ", identificationNumber=" + identificationNumber + ", dateOfIssue=" + dateOfIssue
+				+ ", dateOfExpiration=" + dateOfExpiration + ", placeOfIssue=" + placeOfIssue + ", nationality="
+				+ nationality + ", profession=" + profession + "]";
 	}
+
+	
 
 }

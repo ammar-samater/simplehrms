@@ -79,12 +79,6 @@ public class Employee implements Serializable {
 
 	private String religionLang2;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "employee_id")
-	private List<EmployeePosition> employeePositions;
-
-
-
 	public Employee() {
 	}
 
@@ -363,45 +357,6 @@ public class Employee implements Serializable {
 	 */
 	public void setReligionLang2(String religionLang2) {
 		this.religionLang2 = religionLang2;
-	}
-
-	/**
-	 * @return the employeePositions
-	 */
-	public List<EmployeePosition> getEmployeePositions() {
-		return employeePositions;
-	}
-
-	/**
-	 * @param employeePositions
-	 *            the employeePositions to set
-	 */
-	public void setEmployeePositions(List<EmployeePosition> employeePositions) {
-		this.employeePositions = employeePositions;
-	}
-
-	/**
-	 * Method to add an employee position
-	 * 
-	 * @param employeePosition
-	 * @return the added employee position 
-	 */
-	public EmployeePosition addEmployeePosition(EmployeePosition employeePosition) {
-		getEmployeePositions().add(employeePosition);
-
-		return employeePosition;
-	}
-
-	/**
-	 * Method to remove an employee position
-	 * 
-	 * @param employeePosition
-	 * @return the removed employee position 
-	 */
-	public EmployeePosition removeEmployeePosition(EmployeePosition employeePosition) {
-		getEmployeePositions().remove(employeePosition);
-
-		return employeePosition;
 	}
 
 	/**

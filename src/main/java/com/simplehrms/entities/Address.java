@@ -3,11 +3,13 @@ package com.simplehrms.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+// Hussain 
+
 /**
  * The persistent class for the address database table.
  * 
  * @author Ammar Samater
- * @author
+ * @author Hussain 
  */
 @Entity
 @Table(name = "address")

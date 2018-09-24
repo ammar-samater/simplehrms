@@ -26,129 +26,94 @@ function loadDashboard(parent) {
 }
 
 function loadDepartments(parent) {
-	dropChildNodes(parent);
-	var url = "/departments";
-	getJson(
-			url,
-			function(data) {
-				var frag = document.createDocumentFragment();
 
-				// table
-				var container = document.createElement('div');
-				var tableId = "departments_table";
+	var structure = {
+		entityName : "department",
+		url : "http://localhost:8080/departments",
+		headers : [ "Department Id", "Department Name", "إسم القسم", "Site" ],
+		keys : [ "departmentId", "name", "nameLang2", "site.name" ],
+		options : {
+			create : {
+				createForm : "http://localhost:8080/departments/create",
+				createURL : "http://localhost:8080/departments"
+			},
+			update : {
+				updateForm : "http://localhost:8080/departments/id/update",
+				updateURL : "http://localhost:8080/departments/id"
+			},
+			audit : "http://localhost:8080/departments/id/audit",
+			deleteURL : "http://localhost:8080/departments/id"
+		}
+	};
+	sendAjaxRequest(structure.url, "GET", function(data) {
+		data = JSON.parse(data);
+		var container = document.createElement('div');
+		container.id = "data";
+		var tableId = "departments_table";
 
-				container.id = "data";
-				container.appendChild(createSearchField(tableId));
-				var headers = [ "Department Id", "Department Name",
-						"إسم القسم", "Site" ];
-				var keys = [ "departmentId", "name", "nameLang2", "site.name" ];
-				container.appendChild(createTable(parent, data, tableId, url, headers,
-						keys, true, true));
-				var addFormId = "add_department_form";
-				container.appendChild(createShowAddFormButton(addFormId));
-				frag.appendChild(container);
+		container.appendChild(createSearchField(tableId));
 
-				// add-department form
-				var container2 = document.createElement('div');
-				container2.id = addFormId;
-				container2.classList.add("hidden");
-				getViewSection(container2,  url + "/add", function() {  // /forms/add/departments   departments/add
-					var submitButton = container2
-							.querySelector("input[type=submit]");
-					submitButton.addEventListener('click', function(e) {
-						e.preventDefault();
-						handleFormSubmit(addFormId, function() {
-							loadDepartments(parent);
-						});
-					});
-				});
-				frag.appendChild(container2);
-				
-				// update-department form
-				var container3 = document.createElement('div');
-				var updateFormId = "update_departments_form";
-				container3.id = updateFormId;
-				container3.classList.add("hidden");
-				frag.appendChild(container3);
-				
-				parent.appendChild(frag);
-			});
+		container.appendChild(createTable(parent, data, tableId, structure, function() {loadDepartments(parent);}));
+
+		container.appendChild(createShowAddFormButton(container, structure, function() {loadDepartments(parent);}));
+
+		dropChildNodes(parent);
+		var frag = document.createDocumentFragment();
+		frag.appendChild(container);
+		parent.appendChild(frag);
+	});
 }
 
 function loadEmployees(parent) {
-	dropChildNodes(parent);
-	var url = "/employees";
-	getJson(
-			url,
-			function(data) {
-				var frag = document.createDocumentFragment();
 
-				// table
-				var container = document.createElement('div');
-				var tableId = "employees_table";
+	var structure = {
+		url : "http://localhost:8080/employees",
+		headers : [ "Employee Number", "First Name", "Last Name",
+				"Date of Birth", "Date of Hire" ],
+		keys : [ "employeeNumber", "firstName", "lastName", "dob", "hireDate" ],
+		options : {
+			create : {
+				createForm : "http://localhost:8080/employees/create",
+				createURL : "http://localhost:8080/employees"
+			},
+			update : {
+				updateForm : "http://localhost:8080/employees/id/update",
+				updateURL : "http://localhost:8080/employees/id"
+			},
+			audit : "http://localhost:8080/employees/id/audit",
+			deleteURL : "http://localhost:8080/employees/id/audit"
+		}
+	};
+	sendAjaxRequest(structure.url, "GET", function(data) {
+		data = JSON.parse(data);
+		var container = document.createElement('div');
+		container.id = "data";
+		var tableId = "employees_table";
 
-				container.id = "data";
-				container.appendChild(createSearchField(tableId));
-				var headers = [ "Employee Number", "First Name", "Last Name", 
-						"Date of Birth", "Date of Hire"];
-				var keys = [ "employeeNumber", "firstName", "lastName", "dob", "hireDate" ];
-				container.appendChild(createTable(parent, data, tableId, url, headers,
-						keys, true, true));
-				var addFormId = "add_employee_form";
-				container.appendChild(createShowAddFormButton(addFormId));
-				frag.appendChild(container);
+		container.appendChild(createSearchField(tableId));
 
-				// add-department form
-				var container2 = document.createElement('div');
-				container2.id = addFormId;
-				container2.classList.add("hidden");
-				getViewSection(container2, url + "/add", function() { //"/forms/add" + url
-					var submitButton = container2
-							.querySelector("input[type=submit]");
-					submitButton.addEventListener('click', function(e) {
-						e.preventDefault();
-						handleFormSubmit(addFormId, function() {
-							loadEmployees(parent);
-						});
-					});
-				});
-				frag.appendChild(container2);
-				
-		
-				var container3 = document.createElement('div');
-				container3.id = "update_employee_form";
-				container3.classList.add("hidden");
-				frag.appendChild(container3);
-				
-				parent.appendChild(frag);
-			});
+		container.appendChild(createTable(parent, data, tableId, structure, function() {loadEmployees(parent);}));
+		// var addFormId = "add_employees_form";
+		container.appendChild(createShowAddFormButton(container, structure, function() {loadEmployees(parent);}));
+
+		dropChildNodes(parent);
+		var frag = document.createDocumentFragment();
+		frag.appendChild(container);
+		parent.appendChild(frag);
+	});
 }
 
 function dropChildNodes(element) {
-	//alert(element);
 	while (element.hasChildNodes()) {
 		element.removeChild(element.lastChild);
 	}
 }
 
-function getJson(url, callback) {
+function sendAjaxRequest(url, method, callback) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			callback(JSON.parse(this.responseText));
-		} else if (this.readyState == 4) {
-			// callback(this.status); display errorMessage()
-		}
-	};
-	xhttp.open("GET", url, true);
-	xhttp.send();
-}
-
-function sendAjaxRequest(url, method, callback){
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			callback();
+			callback(this.responseText);
 		} else if (this.readyState == 4) {
 			// callback(this.status); display errorMessage()
 		}
@@ -181,5 +146,3 @@ function hideSiblings(element) {
 			sibling.classList.add("hidden");
 
 }
-
-

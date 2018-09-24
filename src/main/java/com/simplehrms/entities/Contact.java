@@ -3,6 +3,7 @@ package com.simplehrms.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+// Hussain
 
 /**
  * The persistent class for the contact database table.
