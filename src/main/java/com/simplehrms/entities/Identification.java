@@ -23,7 +23,7 @@ public class Identification implements Serializable {
 	@MapsId
 	private Employee employee;
 	
-	
+    @Enumerated(EnumType.STRING)
 	private IdentificationType identificationType;
 
 	@Column(name = "identification_number", nullable = false)  
