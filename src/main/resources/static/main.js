@@ -94,8 +94,15 @@ function loadEmployees(parent) {
 
 		container.appendChild(createTable(parent, data, tableId, structure, function() {loadEmployees(parent);}));
 		// var addFormId = "add_employees_form";
-		container.appendChild(createShowAddFormButton(container, structure, function() {loadEmployees(parent);}));
+		
+		container.appendChild(createShowAddFormButton(container, structure, function() {loadEmployees(parent);}, function(){
+			document.getElementById("country").addEventListener("change",
+					getCitySelectList);
+		}));
+        
+		//document.getElementById("country").addEventListener("change", getCitySelectList);
 
+		
 		dropChildNodes(parent);
 		var frag = document.createDocumentFragment();
 		frag.appendChild(container);

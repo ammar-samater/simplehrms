@@ -2,20 +2,23 @@ package com.simplehrms.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The persistent class for the employee database table.
@@ -63,10 +66,10 @@ public class Employee implements Serializable {
 	private String preferredNameLang2;
 
 	@Temporal(TemporalType.DATE)
-	private Date dob;
+	private Date dob; 
 
-	@Column
-	private String gender;
+	 @Enumerated(EnumType.STRING)
+	private Gender gender;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "hire_date")
@@ -78,6 +81,11 @@ public class Employee implements Serializable {
 	private String religion;
 
 	private String religionLang2;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private Address address;
 
 	public Employee() {
 	}
@@ -101,7 +109,7 @@ public class Employee implements Serializable {
 	 */
 	public Employee(String employeeNumber, String firstName, String midName, String lastName, String firstNameLang2,
 			String midNameLang2, String lastNameLang2, String preferredName, String preferredNameLang2, Date dob,
-			String gender, Date hireDate, String martialStatus, String religion, String religionLang2) {
+			Gender gender, Date hireDate, String martialStatus, String religion, String religionLang2) {
 		this.employeeNumber = employeeNumber;
 		this.firstName = firstName;
 		this.midName = midName;
@@ -117,6 +125,46 @@ public class Employee implements Serializable {
 		this.martialStatus = martialStatus;
 		this.religion = religion;
 		this.religionLang2 = religionLang2;
+	}
+
+	/**
+	 * @param employeeNumber
+	 * @param firstName
+	 * @param midName
+	 * @param lastName
+	 * @param firstNameLang2
+	 * @param midNameLang2
+	 * @param lastNameLang2
+	 * @param preferredName
+	 * @param preferredNameLang2
+	 * @param dob
+	 * @param gender
+	 * @param hireDate
+	 * @param martialStatus
+	 * @param religion
+	 * @param religionLang2
+	 * @param address
+	 */
+	public Employee(String employeeNumber, String firstName, String midName, String lastName, String firstNameLang2,
+			String midNameLang2, String lastNameLang2, String preferredName, String preferredNameLang2, Date dob,
+			Gender gender, Date hireDate, String martialStatus, String religion, String religionLang2,
+			Address address) {
+		this.employeeNumber = employeeNumber;
+		this.firstName = firstName;
+		this.midName = midName;
+		this.lastName = lastName;
+		this.firstNameLang2 = firstNameLang2;
+		this.midNameLang2 = midNameLang2;
+		this.lastNameLang2 = lastNameLang2;
+		this.preferredName = preferredName;
+		this.preferredNameLang2 = preferredNameLang2;
+		this.dob = dob;
+		this.gender = gender;
+		this.hireDate = hireDate;
+		this.martialStatus = martialStatus;
+		this.religion = religion;
+		this.religionLang2 = religionLang2;
+		this.address = address;
 	}
 
 	/**
@@ -287,7 +335,7 @@ public class Employee implements Serializable {
 	/**
 	 * @return the gender
 	 */
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
@@ -295,7 +343,7 @@ public class Employee implements Serializable {
 	 * @param gender
 	 *            the gender to set
 	 */
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
@@ -357,6 +405,21 @@ public class Employee implements Serializable {
 	 */
 	public void setReligionLang2(String religionLang2) {
 		this.religionLang2 = religionLang2;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address
+	 *            the address to set
+	 */
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	/**

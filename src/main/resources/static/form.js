@@ -42,3 +42,33 @@ function setValue(obj, path, value) {
 
 	schema[pList[len - 1]] = value;
 }
+
+/**
+ * This method shows the cities for the selected country. Assumes there is an
+ * exisiting select element with the id 'cities'
+ * 
+ */
+function getCitySelectList() {
+	var country_select = document.getElementById("country");
+	var country_id = country_select.options[country_select.selectedIndex].value;
+
+	sendAjaxRequest("/countries/" + country_id + "/cities", "GET", function(
+			data) {
+		data = JSON.parse(data);
+		var citySelect = document.getElementById("city");
+		citySelect.options.length = 0;
+		
+		var option, city, i;
+		var length = data.length;
+     
+		for (i = 0; i < length; i++) {
+			city = data[i];
+			option = document.createElement("option");
+			option.value = city.id;
+			option.text = city.name;
+			citySelect.add(option);
+		}
+
+	});
+
+}

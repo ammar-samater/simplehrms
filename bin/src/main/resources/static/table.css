@@ -1,0 +1,74 @@
+.dataTable {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.dataTable td, .dataTable th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.dataTable tr:nth-child(even) {
+	background-color: #f9f9ff;
+}
+
+.dataTable tr:hover {
+	background-color: #f0f9fB;
+}
+
+.dataTable th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #0099BB;
+	color: white;
+	cursor: pointer;
+}
+
+.searchInput {
+	display: inline-block;
+	width: 130px;
+	font-size: 16px;
+	padding: 12px 12px 12px 12px;
+	border: 2px solid #ddd;
+	border-radius: 4px;
+	margin-top: 5px;
+	margin-bottom: 12px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+.searchInput:focus {
+	width: 50%;
+}
+
+.add-btn {
+	display: inline-block;
+	background-color: #0098BB;
+	color: white;
+	padding: 12px 20px 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	float: right;
+	font-size: 16px;
+	margin-top: 16px;
+	width: 120px;}
+
+/* Darker background on mouse-over */
+.add-btn:hover {
+	background-color: #009FBF;
+}
+
+.add-btn:active {
+	background-color: #0098BB;
+	transform: translateY(1px);
+}
+
+.fa {
+	margin: 6px;
+	color: #0099BB;
+	cursor: pointer;
+}

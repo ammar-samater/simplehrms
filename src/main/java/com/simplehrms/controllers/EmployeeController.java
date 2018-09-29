@@ -3,7 +3,7 @@
  */
 package com.simplehrms.controllers;
 
-import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.simplehrms.entities.Employee;
-import com.simplehrms.repositories.DepartmentRepository;
+import com.simplehrms.exceptions.BadRequestException;
+import com.simplehrms.exceptions.ResourceNotFoundException;
+import com.simplehrms.repositories.CountryRepository;
 import com.simplehrms.repositories.EmployeeRepository;
 
 /**
@@ -30,8 +32,10 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
+
+	
 	@Autowired
-	private DepartmentRepository departmentRepository;
+	private CountryRepository countryRepository;
 	
 	@GetMapping(path="/employees")
 	public @ResponseBody Iterable<Employee> getAllEmployees() {
@@ -39,20 +43,36 @@ public class EmployeeController {
 	}
 	
 	@GetMapping(path="/employees/{id}")
-	public @ResponseBody Employee getEmployeeById(@PathVariable Long id) {
+	public @ResponseBody Employee getEmployeeById(@PathVariable Long id)  {
+		try {
 		return employeeRepository.findById(id).get();
+		} catch (NoSuchElementException e) {
+			throw new ResourceNotFoundException("Unable to find an employee with id " + id);
+		}
 	}
 
 	
 	@PostMapping(path="/employees")
 	public @ResponseBody String addEmployee(@RequestBody Employee employee) {
+		try {
 		employeeRepository.save(employee);
 		return "employees/" + employee.getId();
+		} catch(Exception e) {
+			if(e instanceof org.springframework.dao.DataIntegrityViolationException) {
+				throw new BadRequestException("employee not added due to constraint violation");
+			} else {
+				throw e;
+			}
+		}
 	}
 	
 	@DeleteMapping(path="/employees/{id}")
 	public @ResponseBody void deleteEmployee(@PathVariable Long id) {
+		try {
 		employeeRepository.deleteById(id);
+		} catch (org.springframework.dao.EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Unable to find an employee with id " + id);
+		}
 		
 	}
 	
@@ -63,15 +83,15 @@ public class EmployeeController {
 	}
 	
 	@GetMapping(path="/employees/create")
-	public String getAddEmployeeForm(Map<String, Object> model) {
-		//model.put("sites", siteRepository.findAll());
+	public String getAddEmployeeForm(Model model) {
+		model.addAttribute("countries", countryRepository.findAll());
 		return "forms/add-employee-form";
 	}
 	
 	@GetMapping(path="/employees/{id}/update")
 	public String getUpdateEmployeeForm(@PathVariable Long id, Model model) {
 		model.addAttribute("employee", employeeRepository.findById(id).get());
-		//model.addAttribute("departments", departmentRepository.findAll());
+		model.addAttribute("countries", countryRepository.findAll());
 		return "forms/update-employee-form";
 	}
 

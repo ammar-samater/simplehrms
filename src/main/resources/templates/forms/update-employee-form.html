@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="container">
 	<form action="/employees" method="post">
+	<input type="hidden" id="id" name="id" th:value="${employee.id}">
 		<div class="row">
 			<div class="col-25">
 				<label for="employee_number">Employee Number</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="employee_number" name="employeeNumber">
+				<input type="text" id="employee_number" name="employeeNumber" th:value="${employee.employeeNumber}">
 			</div>
 		</div>
 		<div class="row">
@@ -15,13 +16,13 @@
 				<label for="first_name">First Name</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="first_name" name="firstName">
+				<input type="text" id="first_name" name="firstName" th:value="${employee.firstName}">
 			</div>
 			<div class="col-25">
 				<label for="first_name_lang2">الإسم الأول</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="first_name_lang2" name="firstNameLang2">
+				<input type="text" id="first_name_lang2" name="firstNameLang2" th:value="${employee.firstNameLang2}">
 			</div>
 		</div>
 		<div class="row">
@@ -29,13 +30,13 @@
 				<label for="mid_name">Middle Name</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="mid_name" name="midName">
+				<input type="text" id="mid_name" name="midName" th:value="${employee.midName}">
 			</div>
 			<div class="col-25">
 				<label for="mid_name_lang2">إسم الأب</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="mid_name_lang2" name="midNameLang2">
+				<input type="text" id="mid_name_lang2" name="midNameLang2" th:value="${employee.midNameLang2}">
 			</div>
 		</div>
 		<div class="row">
@@ -43,13 +44,13 @@
 				<label for="last_name">Last Name</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="last_name" name="lastName">
+				<input type="text" id="last_name" name="lastName" th:value="${employee.lastName}">
 			</div>
 			<div class="col-25">
 				<label for="last_name_lang2">إسم العائلة</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="last_name_lang2" name="lastNameLang2">
+				<input type="text" id="last_name_lang2" name="lastNameLang2" th:value="${employee.lastNameLang2}">
 			</div>
 		</div>
 		<div class="row">
@@ -57,13 +58,13 @@
 				<label for="preferred_name">Preferred Name</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="preferred_name" name="preferredName">
+				<input type="text" id="preferred_name" name="preferredName" th:value="${employee.preferredName}">
 			</div>
 			<div class="col-25">
 				<label for="preferred_name_lang2">الاسم المفضل</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="preferred_name_lang2" name="preferredNameLang2">
+				<input type="text" id="preferred_name_lang2" name="preferredNameLang2" th:value="${employee.preferredNameLang2}">
 			</div>
 		</div>
 		<div class="row">
