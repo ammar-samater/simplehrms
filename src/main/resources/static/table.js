@@ -59,7 +59,11 @@ function createTable(parent, data, id, structure, reload) {
 			if (isEditable) {
 				var icon1 = createOptionIcon("editIcon", [ "fa", "fa-edit" ]);
 				icon1.addEventListener('click', createShowUpdateFormFunction(
-						parent, structure, data[i].id, reload));
+						parent, structure, data[i].id, reload, function() {
+							document.getElementById("country")
+									.addEventListener("change",
+											getCitySelectList);
+						}));
 			}
 
 			if (isDeletable) {
@@ -90,7 +94,7 @@ function createTable(parent, data, id, structure, reload) {
  * @param id
  * @returns
  */
-function createShowUpdateFormFunction(parent, structure, id, reload) {
+function createShowUpdateFormFunction(parent, structure, id, reload, callback) {
 	return function() {
 		getViewSection(parent, structure.options.update.updateForm.replace(
 				"/id", "/" + id), function() {
@@ -102,6 +106,8 @@ function createShowUpdateFormFunction(parent, structure, id, reload) {
 					reload();
 				});
 			});
+			if (typeof callback === "function")
+				callback();
 		});
 	};
 }

@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author
  */
 @Entity
-@Table(name = "employee")
+@Table(name = "Employees")
 @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -66,21 +66,21 @@ public class Employee implements Serializable {
 	private String preferredNameLang2;
 
 	@Temporal(TemporalType.DATE)
-	private Date dob; 
+	private Date dob;
 
-	 @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "hire_date")
 	private Date hireDate;
 
-	@Column(name = "martial_status")
-	private String martialStatus;
+	@Enumerated(EnumType.STRING)
+	@Column(name="martial_status") 
+	private MartialStatus martialStatus;
 
-	private String religion;
-
-	private String religionLang2;
+	@Enumerated(EnumType.STRING)
+	private Religion religion;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
@@ -88,83 +88,6 @@ public class Employee implements Serializable {
 	private Address address;
 
 	public Employee() {
-	}
-
-	/**
-	 * @param employeeNumber
-	 * @param firstName
-	 * @param midName
-	 * @param lastName
-	 * @param firstNameLang2
-	 * @param midNameLang2
-	 * @param lastNameLang2
-	 * @param preferredName
-	 * @param preferredNameLang2
-	 * @param dob
-	 * @param gender
-	 * @param hireDate
-	 * @param martialStatus
-	 * @param religion
-	 * @param religionLang2
-	 */
-	public Employee(String employeeNumber, String firstName, String midName, String lastName, String firstNameLang2,
-			String midNameLang2, String lastNameLang2, String preferredName, String preferredNameLang2, Date dob,
-			Gender gender, Date hireDate, String martialStatus, String religion, String religionLang2) {
-		this.employeeNumber = employeeNumber;
-		this.firstName = firstName;
-		this.midName = midName;
-		this.lastName = lastName;
-		this.firstNameLang2 = firstNameLang2;
-		this.midNameLang2 = midNameLang2;
-		this.lastNameLang2 = lastNameLang2;
-		this.preferredName = preferredName;
-		this.preferredNameLang2 = preferredNameLang2;
-		this.dob = dob;
-		this.gender = gender;
-		this.hireDate = hireDate;
-		this.martialStatus = martialStatus;
-		this.religion = religion;
-		this.religionLang2 = religionLang2;
-	}
-
-	/**
-	 * @param employeeNumber
-	 * @param firstName
-	 * @param midName
-	 * @param lastName
-	 * @param firstNameLang2
-	 * @param midNameLang2
-	 * @param lastNameLang2
-	 * @param preferredName
-	 * @param preferredNameLang2
-	 * @param dob
-	 * @param gender
-	 * @param hireDate
-	 * @param martialStatus
-	 * @param religion
-	 * @param religionLang2
-	 * @param address
-	 */
-	public Employee(String employeeNumber, String firstName, String midName, String lastName, String firstNameLang2,
-			String midNameLang2, String lastNameLang2, String preferredName, String preferredNameLang2, Date dob,
-			Gender gender, Date hireDate, String martialStatus, String religion, String religionLang2,
-			Address address) {
-		this.employeeNumber = employeeNumber;
-		this.firstName = firstName;
-		this.midName = midName;
-		this.lastName = lastName;
-		this.firstNameLang2 = firstNameLang2;
-		this.midNameLang2 = midNameLang2;
-		this.lastNameLang2 = lastNameLang2;
-		this.preferredName = preferredName;
-		this.preferredNameLang2 = preferredNameLang2;
-		this.dob = dob;
-		this.gender = gender;
-		this.hireDate = hireDate;
-		this.martialStatus = martialStatus;
-		this.religion = religion;
-		this.religionLang2 = religionLang2;
-		this.address = address;
 	}
 
 	/**
@@ -365,7 +288,7 @@ public class Employee implements Serializable {
 	/**
 	 * @return the martialStatus
 	 */
-	public String getMartialStatus() {
+	public MartialStatus getMartialStatus() {
 		return martialStatus;
 	}
 
@@ -373,14 +296,14 @@ public class Employee implements Serializable {
 	 * @param martialStatus
 	 *            the martialStatus to set
 	 */
-	public void setMartialStatus(String martialStatus) {
+	public void setMartialStatus(MartialStatus martialStatus) {
 		this.martialStatus = martialStatus;
 	}
 
 	/**
 	 * @return the religion
 	 */
-	public String getReligion() {
+	public Religion getReligion() {
 		return religion;
 	}
 
@@ -388,23 +311,8 @@ public class Employee implements Serializable {
 	 * @param religion
 	 *            the religion to set
 	 */
-	public void setReligion(String religion) {
+	public void setReligion(Religion religion) {
 		this.religion = religion;
-	}
-
-	/**
-	 * @return the religionLang2
-	 */
-	public String getReligionLang2() {
-		return religionLang2;
-	}
-
-	/**
-	 * @param religionLang2
-	 *            the religionLang2 to set
-	 */
-	public void setReligionLang2(String religionLang2) {
-		this.religionLang2 = religionLang2;
 	}
 
 	/**

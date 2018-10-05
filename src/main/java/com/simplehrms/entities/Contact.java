@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author
  */
 @Entity
-@Table(name="contact")
+@Table(name="Contacts")
 @NamedQuery(name="Contact.findAll", query="SELECT c FROM Contact c")
 public class Contact implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author
  */
 @Entity
-@Table(name = "country")
+@Table(name = "Countries")
 @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")
 public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;

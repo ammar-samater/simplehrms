@@ -1,21 +1,21 @@
 @charset "UTF-8";
 
-form input[type=text], select, textarea {
-	width: 45%;
+* {
+	box-sizing: border-box;
+}
+
+form input[type=text], input[type=date], select, textarea {
+	width: 100%;
 	padding: 12px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	resize: vertical;
-}
-
-.inline {
-	display: inline;
 }
 
 label {
-	padding: 12px 12px 12px 0;
-	display: inline-block;
+	padding: 0px 6px 6px 6px;
+	display: block;
 	font-size: 18px;
+	vertical-align: top;
 }
 
 input[type=submit] {
@@ -53,9 +53,82 @@ input[type=submit]:active {
 	padding: 20px;
 }
 
+.row {
+	margin-top: 6px;
+}
+
+.col-15 {
+	float: left;
+	width: 12%;
+	margin-top: 6px;
+}
+
+.col-25 {
+	float: left;
+	width: 25%;
+	margin-top: 6px;
+}
+
+.col-35 {
+	float: left;
+	width: 36%;
+	margin-top: 6px;
+}
+
+.col-15-rt {
+	float: right;
+	width: 12%;
+	margin-top: 6px;
+}
+
+.col-25-rt {
+	float: right;
+	width: 25%;
+	margin-top: 6px;
+}
+
+.col-35-rt {
+	float: right;
+	width: 36%;
+	margin-top: 6px;
+}
+
 /* Clear floats after the columns */
 .row:after {
 	content: "";
 	display: table;
 	clear: both;
+}
+
+@media screen and (max-width: 1250px) {
+	.col-15, .col-15-rt {
+		width: 14%;
+	}
+	.col-35, .col-35-rt {
+		width: 35%;
+	}
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+	label {
+		margin-top: 16px;
+	}
+	
+	.row {
+		margin-top: 0px;
+	}
+	.col-15, .col-15-rt {
+		text-align: center;
+	}
+	.col-15, .col-25, .col-35, .col-15-rt, .col-25-rt, .col-35-rt, input[type=submit]
+		{
+		width: 100%;
+	}
+	input[type=radio] {
+		text-align: left;
+	}
+	input[type=submit] {
+		margin-top: 18px;
+	}
 }

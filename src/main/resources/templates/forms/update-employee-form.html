@@ -2,154 +2,214 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="container">
 	<form action="/employees" method="post">
-	<input type="hidden" id="id" name="id" th:value="${employee.id}">
+		<input type="hidden" id="id" name="id" th:value="${employee.id}">
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="employee_number">Employee Number</label>
 			</div>
-			<div class="col-75">
-				<input type="text" id="employee_number" name="employeeNumber" th:value="${employee.employeeNumber}">
+			<div class="col-35">
+				<input type="text" id="employee_number" name="employeeNumber"
+					th:value="${employee.employeeNumber}">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
-				<label for="first_name">First Name</label>
+			<div>
+				<div class="col-15">
+					<label for="first_name">First Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="first_name" name="firstName"
+						th:value="${employee.firstName}">
+				</div>
 			</div>
-			<div class="col-75">
-				<input type="text" id="first_name" name="firstName" th:value="${employee.firstName}">
-			</div>
-			<div class="col-25">
-				<label for="first_name_lang2">الإسم الأول</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="first_name_lang2" name="firstNameLang2" th:value="${employee.firstNameLang2}">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-25">
-				<label for="mid_name">Middle Name</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="mid_name" name="midName" th:value="${employee.midName}">
-			</div>
-			<div class="col-25">
-				<label for="mid_name_lang2">إسم الأب</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="mid_name_lang2" name="midNameLang2" th:value="${employee.midNameLang2}">
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="first_name_lang2">الإسم الأول</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="first_name_lang2" name="firstNameLang2"
+						th:value="${employee.firstNameLang2}">
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
-				<label for="last_name">Last Name</label>
+			<div>
+				<div class="col-15">
+					<label for="mid_name">Middle Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="mid_name" name="midName" th:value="${employee.midName}">
+				</div>
 			</div>
-			<div class="col-75">
-				<input type="text" id="last_name" name="lastName" th:value="${employee.lastName}">
-			</div>
-			<div class="col-25">
-				<label for="last_name_lang2">إسم العائلة</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="last_name_lang2" name="lastNameLang2" th:value="${employee.lastNameLang2}">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-25">
-				<label for="preferred_name">Preferred Name</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="preferred_name" name="preferredName" th:value="${employee.preferredName}">
-			</div>
-			<div class="col-25">
-				<label for="preferred_name_lang2">الاسم المفضل</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="preferred_name_lang2" name="preferredNameLang2" th:value="${employee.preferredNameLang2}">
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="mid_name_lang2">إسم الأب</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="mid_name_lang2" name="midNameLang2"
+						th:value="${employee.midNameLang2}">
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div>
+				<div class="col-15">
+					<label for="last_name">Last Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="last_name" name="lastName"
+						th:value="${employee.lastName}">
+				</div>
+			</div>
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="last_name_lang2">إسم العائلة</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="last_name_lang2" name="lastNameLang2"
+						th:value="${employee.lastNameLang2}">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div>
+				<div class="col-15">
+					<label for="preferred_name">Preferred Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="preferred_name" name="preferredName"
+						th:value="${employee.preferredName}">
+				</div>
+			</div>
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="preferred_name_lang2">الاسم المفضل</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="preferred_name_lang2" name="preferredNameLang2"
+						th:value="${employee.preferredNameLang2}">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
 				<label for="dob">Date of Birth</label>
 			</div>
-			<div class="col-75">
-				<input type="date" id="dob" name="dob">
+			<div class="col-35">
+				<input type="date" id="dob" name="dob" th:value="${employee.dob}">
 			</div>
 		</div>
+
+		
 		<div class="row">
 			<div class="col-25">
 				<label for="gender">Gender</label>
+				<input type="radio" name="gender" value="Male" th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Male}">
+				Male <br>
+				<input type="radio" name="gender" value="Female" th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Female}">
+				Female <br>
+				<input type="radio" name="gender" value="Other" th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Other}">
+				Other <br>
 			</div>
-			<div class="col-75">
-				<input type="radio" name="gender" value="Male">
-				Male<br>
-				<input type="radio" name="gender" value="Female">
-				Female<br>
-				<input type="radio" name="gender" value="Other">
-				Other<br>
+			<div class="col-25">
+				<label for="martialStatus">Martial Status</label>
+				<input type="radio" name="martialStatus" value="SINGLE" th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).SINGLE}">
+				Single <br>
+				<input type="radio" name="martialStatus" value="MARRIED" th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).MARRIED}">
+				Married <br>
+				<input type="radio" name="martialStatus" value="OTHER" th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).OTHER}">
+				Other <br>
+			</div>
+			<div class="col-25">
+				<label for="religion">Religion</label>
+				<input type="radio" name="religion" value="ISLAM" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).ISLAM}">
+				Islam <br>
+				<input type="radio" name="religion" value="CHRISTIANITY" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).CHRISTIANITY}">
+				Christianity <br>
+				<input type="radio" name="religion" value="JUDAISM" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).JUDAISM}">
+				Judaism <br>
+				<input type="radio" name="religion" value="OTHER" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).OTHER}">
+				Other <br>
 			</div>
 		</div>
+		
+		
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="dob">Date of Joining</label>
 			</div>
-			<div class="col-75">
-				<input type="date" id="hireDate" name="hireDate">
+			<div class="col-35">
+				<input type="date" id="hireDate" name="hireDate" th:value="${employee.hireDate}">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="unit-number">Unit Number</label>
 			</div>
-			<div class="col-75">
-				<input type="text" id="unit-number" name="address.unitNumber">
-			</div>
-			<div class="col-25">
-				<label for="street_number">Street Number</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="street_number" name="address.streetNumber">
-			</div>
-			<div class="col-25">
-				<label for="street_name">Street Name</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="street_name" name="address.streetName">
+			<div class="col-35">
+				<input type="text" id="unit-number" name="address.unitNumber"
+					th:value="${employee.address.unitNumber}">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
+				<label for="street_number">Street Number</label>
+			</div>
+			<div class="col-35">
+				<input type="text" id="street_number" name="address.streetNumber"
+					th:value="${employee.address.streetNumber}">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
+				<label for="street_name">Street Name</label>
+			</div>
+			<div class="col-35">
+				<input type="text" id="street_name" name="address.streetName"
+					th:value="${employee.address.streetName}">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
 				<label for="country">Country</label>
 			</div>
-			<div class="col-75">
+			<div class="col-35">
 				<select id="country" name="country.code">
 					<option value="" disabled selected>Select country</option>
 					<option th:each="country : ${countries}" th:value="${country.code}"
-						th:utext="${country.name}" />
+						th:utext="${country.name}"
+						th:selected="${country.code==employee.address.city.country.code}" />
 				</select>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="city">City</label>
 			</div>
-			<div class="col-75">
+			<div class="col-35">
 				<select id="city" name="address.city.id">
 					<option value="" disabled selected>Select city</option>
+					<option th:each="city : ${cities}" th:value="${city.id}"
+						th:utext="${city.name}" th:selected="${city.id==employee.address.city.id}" />
 				</select>
 			</div>
 		</div>
-		<!-- 		<div class="row">
-			<div class="col-25">
-				<label for="department_name">Department</label>
-			</div> 
-			<div class="col-75">
-				<select id="department" name="department.id">
-					<option value="" disabled selected>Select the department</option>
-					<option th:each="department : ${departments}" th:value="${department.id}"
-						th:utext="${department.name}" />
-				</select>
+		<div class="row">
+			<div class="col-15">
+				<label for="postal_code">Postal Code</label>
 			</div>
-		</div> -->
+			<div class="col-35">
+				<input type="text" id="postal_code" name="address.postalCode" th:value="${employee.address.postalCode}">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
+				<label for="additional_number">Additional Number</label>
+			</div>
+			<div class="col-35">
+				<input type="text" id="additional_number" name="address.additionalNumber" th:value="${employee.address.additionalNumber}">
+			</div>
+		</div>
 		<div class="row">
 			<input type="submit" value="Submit">
 		</div>

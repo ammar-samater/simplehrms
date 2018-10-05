@@ -3,124 +3,162 @@
 <div class="container">
 	<form action="/employees" method="post">
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="employee_number">Employee Number</label>
 			</div>
-			<div class="col-75">
-				<input type="text" id="employee_number" name="employeeNumber">
+			<div class="col-35">
+				<input type="text" id="employee_number" name="employeeNumber" required>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
-				<label for="first_name">First Name</label>
+			<div>
+				<div class="col-15">
+					<label for="first_name">First Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="first_name" name="firstName" required>
+				</div>
 			</div>
-			<div class="col-75">
-				<input type="text" id="first_name" name="firstName">
-			</div>
-			<div class="col-25">
-				<label for="first_name_lang2">الإسم الأول</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="first_name_lang2" name="firstNameLang2">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-25">
-				<label for="mid_name">Middle Name</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="mid_name" name="midName">
-			</div>
-			<div class="col-25">
-				<label for="mid_name_lang2">إسم الأب</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="mid_name_lang2" name="midNameLang2">
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="first_name_lang2">الإسم الأول</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="first_name_lang2" name="firstNameLang2">
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
-				<label for="last_name">Last Name</label>
+			<div>
+				<div class="col-15">
+					<label for="mid_name">Middle Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="mid_name" name="midName">
+				</div>
 			</div>
-			<div class="col-75">
-				<input type="text" id="last_name" name="lastName">
-			</div>
-			<div class="col-25">
-				<label for="last_name_lang2">إسم العائلة</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="last_name_lang2" name="lastNameLang2">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-25">
-				<label for="preferred_name">Preferred Name</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="preferred_name" name="preferredName">
-			</div>
-			<div class="col-25">
-				<label for="preferred_name_lang2">الاسم المفضل</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="preferred_name_lang2" name="preferredNameLang2">
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="mid_name_lang2">إسم الأب</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="mid_name_lang2" name="midNameLang2">
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div>
+				<div class="col-15">
+					<label for="last_name">Last Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="last_name" name="lastName" required>
+				</div>
+			</div>
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="last_name_lang2">إسم العائلة</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="last_name_lang2" name="lastNameLang2">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div>
+				<div class="col-15">
+					<label for="preferred_name">Preferred Name</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="preferred_name" name="preferredName">
+				</div>
+			</div>
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="preferred_name_lang2">الاسم المفضل</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="preferred_name_lang2" name="preferredNameLang2">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
 				<label for="dob">Date of Birth</label>
 			</div>
-			<div class="col-75">
-				<input type="date" id="dob" name="dob">
+			<div class="col-35">
+				<input type="date" id="dob" name="dob" required>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-25">
 				<label for="gender">Gender</label>
-			</div>
-			<div class="col-75">
 				<input type="radio" name="gender" value="Male">
-				Male<br>
+				Male <br>
 				<input type="radio" name="gender" value="Female">
-				Female<br>
+				Female <br>
 				<input type="radio" name="gender" value="Other">
-				Other<br>
+				Other <br>
+			</div>
+			<div class="col-25">
+				<label for="martialStatus">Martial Status</label>
+				<input type="radio" name="martialStatus" value="SINGLE">
+				Single <br>
+				<input type="radio" name="martialStatus" value="MARRIED">
+				Married <br>
+				<input type="radio" name="martialStatus" value="OTHER">
+				Other <br>
+			</div>
+			<div class="col-25">
+				<label for="religion">Religion</label>
+				<input type="radio" name="religion" value="ISLAM">
+				Islam <br>
+				<input type="radio" name="religion" value="CHRISTIANITY">
+				Christianity <br>
+				<input type="radio" name="religion" value="JUDAISM">
+				Judaism <br>
+				<input type="radio" name="religion" value="OTHER">
+				Other <br>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="dob">Date of Joining</label>
 			</div>
-			<div class="col-75">
+			<div class="col-35">
 				<input type="date" id="hireDate" name="hireDate">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="unit-number">Unit Number</label>
 			</div>
-			<div class="col-75">
+			<div class="col-35">
 				<input type="text" id="unit-number" name="address.unitNumber">
-			</div>
-			<div class="col-25">
-				<label for="street_number">Street Number</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="street_number" name="address.streetNumber">
-			</div>
-			<div class="col-25">
-				<label for="street_name">Street Name</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="street_name" name="address.streetName">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
+				<label for="street_number">Street Number</label>
+			</div>
+			<div class="col-35">
+				<input type="text" id="street_number" name="address.streetNumber" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
+				<label for="street_name">Street Name</label>
+			</div>
+			<div class="col-35">
+				<input type="text" id="street_name" name="address.streetName" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
 				<label for="country">Country</label>
 			</div>
-			<div class="col-75">
-				<select id="country" name="country.code">
+			<div class="col-35">
+				<select id="country" name="country.code" required>
 					<option value="" disabled selected>Select country</option>
 					<option th:each="country : ${countries}" th:value="${country.code}"
 						th:utext="${country.name}" />
@@ -128,27 +166,31 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-25">
+			<div class="col-15">
 				<label for="city">City</label>
 			</div>
-			<div class="col-75">
-				<select id="city" name="address.city.id">
+			<div class="col-35">
+				<select id="city" name="address.city.id" required>
 					<option value="" disabled selected>Select city</option>
 				</select>
 			</div>
 		</div>
-		<!-- 		<div class="row">
-			<div class="col-25">
-				<label for="department_name">Department</label>
-			</div> 
-			<div class="col-75">
-				<select id="department" name="department.id">
-					<option value="" disabled selected>Select the department</option>
-					<option th:each="department : ${departments}" th:value="${department.id}"
-						th:utext="${department.name}" />
-				</select>
+		<div class="row">
+			<div class="col-15">
+				<label for="postal_code">Postal Code</label>
 			</div>
-		</div> -->
+			<div class="col-35">
+				<input type="text" id="postal_code" name="address.postalCode">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
+				<label for="additional_number">Additional Number</label>
+			</div>
+			<div class="col-35">
+				<input type="text" id="additional_number" name="address.additionalNumber">
+			</div>
+		</div>
 		<div class="row">
 			<input type="submit" value="Submit">
 		</div>

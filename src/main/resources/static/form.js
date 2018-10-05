@@ -11,7 +11,12 @@ function handleFormSubmit(parent, callback) {
 	for (var i = 0, l = form.length; i < l; ++i) {
 		var input = form[i];
 		if (input.name) {
-			setValue(obj, input.name, input.value);
+			if (input.type == "radio") {
+				if (input.checked)
+					setValue(obj, input.name, input.value);
+			} else {
+				setValue(obj, input.name, input.value);
+			}
 		}
 	}
 
@@ -57,10 +62,10 @@ function getCitySelectList() {
 		data = JSON.parse(data);
 		var citySelect = document.getElementById("city");
 		citySelect.options.length = 0;
-		
+
 		var option, city, i;
 		var length = data.length;
-     
+
 		for (i = 0; i < length; i++) {
 			city = data[i];
 			option = document.createElement("option");

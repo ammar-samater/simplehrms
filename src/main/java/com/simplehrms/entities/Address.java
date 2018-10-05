@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author Hussain 
  */
 @Entity
-@Table(name = "address")
+@Table(name = "Addresses ")
 @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class Address implements Serializable {
 	@Column(name = "unit_number")
 	private String unitNumber;
 
-	@Column(name = "street_number")
+	@Column(name = "street_number",  nullable = false)
 	private String streetNumber;
 
 	@Column(name = "street_name", nullable = false)

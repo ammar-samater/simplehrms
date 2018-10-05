@@ -16,7 +16,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "competence")
+@Table(name = "Comptencies")
 @NamedQuery(name = "Competence.findAll", query = "SELECT c FROM Competence c")
 public class Competence {
 	

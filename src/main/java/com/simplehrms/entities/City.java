@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author
  */
 @Entity
-@Table(name = "city")
+@Table(name = "Cities")
 @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")
 public class City implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -36,7 +36,7 @@ public class City implements Serializable {
 	private String nameLang2;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "country_code")
+	@JoinColumn(name = "country_code",  nullable = false)
 	private Country country;
 
 	public City() {

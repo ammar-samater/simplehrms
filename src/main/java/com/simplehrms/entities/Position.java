@@ -27,7 +27,7 @@ import javax.persistence.Table;
  * @author
  */
 @Entity
-@Table(name = "position")
+@Table(name = "Positions")
 @NamedQuery(name = "Position.findAll", query = "SELECT p FROM Position p")
 public class Position implements Serializable {
 	private static final long serialVersionUID = 1L;
