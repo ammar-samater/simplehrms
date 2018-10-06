@@ -10,7 +10,7 @@
  * @param structure
  * @returns
  */
-function createTable(parent, data, id, structure, reload) {
+function createTable(parent, data, id, structure, reload, addEventListeners) {
 	var tbodyId = "t_body";
 	var table = document.createElement("TABLE");
 	table.id = id;
@@ -59,11 +59,7 @@ function createTable(parent, data, id, structure, reload) {
 			if (isEditable) {
 				var icon1 = createOptionIcon("editIcon", [ "fa", "fa-edit" ]);
 				icon1.addEventListener('click', createShowUpdateFormFunction(
-						parent, structure, data[i].id, reload, function() {
-							document.getElementById("country")
-									.addEventListener("change",
-											getCitySelectList);
-						}));
+						parent, structure, data[i].id, reload, addEventListeners));
 			}
 
 			if (isDeletable) {

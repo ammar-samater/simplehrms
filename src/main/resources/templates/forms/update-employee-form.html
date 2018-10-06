@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<div class="container">
+<div class="container" onload="initilizeEventListeners()">
 	<form action="/employees" method="post">
 		<input type="hidden" id="id" name="id" th:value="${employee.id}">
 		<div class="row">
@@ -99,41 +99,47 @@
 				<input type="date" id="dob" name="dob" th:value="${employee.dob}">
 			</div>
 		</div>
-
-		
 		<div class="row">
 			<div class="col-25">
 				<label for="gender">Gender</label>
-				<input type="radio" name="gender" value="Male" th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Male}">
+				<input type="radio" name="gender" value="Male"
+					th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Male}">
 				Male <br>
-				<input type="radio" name="gender" value="Female" th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Female}">
+				<input type="radio" name="gender" value="Female"
+					th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Female}">
 				Female <br>
-				<input type="radio" name="gender" value="Other" th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Other}">
+				<input type="radio" name="gender" value="Other"
+					th:checked="${employee.gender == T(com.simplehrms.entities.Gender).Other}">
 				Other <br>
 			</div>
 			<div class="col-25">
 				<label for="martialStatus">Martial Status</label>
-				<input type="radio" name="martialStatus" value="SINGLE" th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).SINGLE}">
+				<input type="radio" name="martialStatus" value="SINGLE"
+					th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).SINGLE}">
 				Single <br>
-				<input type="radio" name="martialStatus" value="MARRIED" th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).MARRIED}">
+				<input type="radio" name="martialStatus" value="MARRIED"
+					th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).MARRIED}">
 				Married <br>
-				<input type="radio" name="martialStatus" value="OTHER" th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).OTHER}">
+				<input type="radio" name="martialStatus" value="OTHER"
+					th:checked="${employee.martialStatus == T(com.simplehrms.entities.MartialStatus).OTHER}">
 				Other <br>
 			</div>
 			<div class="col-25">
 				<label for="religion">Religion</label>
-				<input type="radio" name="religion" value="ISLAM" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).ISLAM}">
+				<input type="radio" name="religion" value="ISLAM"
+					th:checked="${employee.religion == T(com.simplehrms.entities.Religion).ISLAM}">
 				Islam <br>
-				<input type="radio" name="religion" value="CHRISTIANITY" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).CHRISTIANITY}">
+				<input type="radio" name="religion" value="CHRISTIANITY"
+					th:checked="${employee.religion == T(com.simplehrms.entities.Religion).CHRISTIANITY}">
 				Christianity <br>
-				<input type="radio" name="religion" value="JUDAISM" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).JUDAISM}">
+				<input type="radio" name="religion" value="JUDAISM"
+					th:checked="${employee.religion == T(com.simplehrms.entities.Religion).JUDAISM}">
 				Judaism <br>
-				<input type="radio" name="religion" value="OTHER" th:checked="${employee.religion == T(com.simplehrms.entities.Religion).OTHER}">
+				<input type="radio" name="religion" value="OTHER"
+					th:checked="${employee.religion == T(com.simplehrms.entities.Religion).OTHER}">
 				Other <br>
 			</div>
 		</div>
-		
-		
 		<div class="row">
 			<div class="col-15">
 				<label for="dob">Date of Joining</label>
@@ -199,7 +205,8 @@
 				<label for="postal_code">Postal Code</label>
 			</div>
 			<div class="col-35">
-				<input type="text" id="postal_code" name="address.postalCode" th:value="${employee.address.postalCode}">
+				<input type="text" id="postal_code" name="address.postalCode"
+					th:value="${employee.address.postalCode}">
 			</div>
 		</div>
 		<div class="row">
@@ -207,7 +214,8 @@
 				<label for="additional_number">Additional Number</label>
 			</div>
 			<div class="col-35">
-				<input type="text" id="additional_number" name="address.additionalNumber" th:value="${employee.address.additionalNumber}">
+				<input type="text" id="additional_number" name="address.additionalNumber"
+					th:value="${employee.address.additionalNumber}">
 			</div>
 		</div>
 		<div class="row">

@@ -53,9 +53,15 @@ function loadDepartments(parent) {
 
 		container.appendChild(createSearchField(tableId));
 
-		container.appendChild(createTable(parent, data, tableId, structure, function() {loadDepartments(parent);}));
+		container.appendChild(createTable(parent, data, tableId, structure,
+				function() {
+					loadDepartments(parent);
+				}));
 
-		container.appendChild(createShowAddFormButton(container, structure, function() {loadDepartments(parent);}));
+		container.appendChild(createShowAddFormButton(container, structure,
+				function() {
+					loadDepartments(parent);
+				}));
 
 		dropChildNodes(parent);
 		var frag = document.createDocumentFragment();
@@ -92,17 +98,26 @@ function loadEmployees(parent) {
 
 		container.appendChild(createSearchField(tableId));
 
-		container.appendChild(createTable(parent, data, tableId, structure, function() {loadEmployees(parent);}));
+		container.appendChild(createTable(parent, data, tableId, structure,
+				function() {
+					loadEmployees(parent);
+				}, function() {
+					document.getElementById("country").addEventListener(
+							"change", getCitySelectList);
+				}));
 		// var addFormId = "add_employees_form";
-		
-		container.appendChild(createShowAddFormButton(container, structure, function() {loadEmployees(parent);}, function(){
-			document.getElementById("country").addEventListener("change",
-					getCitySelectList);
-		}));
-        
-		//document.getElementById("country").addEventListener("change", getCitySelectList);
 
-		
+		container.appendChild(createShowAddFormButton(container, structure,
+				function() {
+					loadEmployees(parent);
+				}, function() {
+					document.getElementById("country").addEventListener(
+							"change", getCitySelectList);
+				}));
+
+		// document.getElementById("country").addEventListener("change",
+		// getCitySelectList);
+
 		dropChildNodes(parent);
 		var frag = document.createDocumentFragment();
 		frag.appendChild(container);
