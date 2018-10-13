@@ -12,12 +12,17 @@ window.addEventListener('load', function() {
 
 	document.getElementById("departments_tab").addEventListener("click",
 			function() {
-				loadDepartments(mainDiv);
+				loadDepartmentsSection(mainDiv);
 			});
 
 	document.getElementById("employee_mangement_tab").addEventListener("click",
 			function() {
-				loadEmployees(mainDiv);
+				loadEmployeesSection(mainDiv);
+			});
+
+	document.getElementById("leave_management_tab").addEventListener("click",
+			function() {
+				loadLeaveManagementSection(mainDiv);
 			});
 });
 
@@ -25,7 +30,7 @@ function loadDashboard(parent) {
 
 }
 
-function loadDepartments(parent) {
+function loadDepartmentsSection(parent) {
 
 	var structure = {
 		entityName : "department",
@@ -34,13 +39,14 @@ function loadDepartments(parent) {
 		keys : [ "departmentId", "name", "nameLang2", "site.name" ],
 		options : {
 			create : {
-				createForm : "http://localhost:8080/departments/create",
+				createForm : "http://localhost:8080/forms/departments/create",
 				createURL : "http://localhost:8080/departments"
 			},
 			update : {
-				updateForm : "http://localhost:8080/departments/id/update",
+				updateForm : "http://localhost:8080/forms/departments/id/update",
 				updateURL : "http://localhost:8080/departments/id"
 			},
+			details : "http://localhost:8080/departments/id/details",    
 			audit : "http://localhost:8080/departments/id/audit",
 			deleteURL : "http://localhost:8080/departments/id"
 		}
@@ -55,12 +61,12 @@ function loadDepartments(parent) {
 
 		container.appendChild(createTable(parent, data, tableId, structure,
 				function() {
-					loadDepartments(parent);
+					loadDepartmentsSection(parent);
 				}));
 
 		container.appendChild(createShowAddFormButton(container, structure,
 				function() {
-					loadDepartments(parent);
+					loadDepartmentsSection(parent);
 				}));
 
 		dropChildNodes(parent);
@@ -70,7 +76,7 @@ function loadDepartments(parent) {
 	});
 }
 
-function loadEmployees(parent) {
+function loadEmployeesSection(parent) {
 
 	var structure = {
 		url : "http://localhost:8080/employees",
@@ -79,11 +85,11 @@ function loadEmployees(parent) {
 		keys : [ "employeeNumber", "firstName", "lastName", "dob", "hireDate" ],
 		options : {
 			create : {
-				createForm : "http://localhost:8080/employees/create",
+				createForm : "http://localhost:8080/forms/employees/create",
 				createURL : "http://localhost:8080/employees"
 			},
 			update : {
-				updateForm : "http://localhost:8080/employees/id/update",
+				updateForm : "http://localhost:8080/forms/employees/id/update",
 				updateURL : "http://localhost:8080/employees/id"
 			},
 			audit : "http://localhost:8080/employees/id/audit",
@@ -100,7 +106,7 @@ function loadEmployees(parent) {
 
 		container.appendChild(createTable(parent, data, tableId, structure,
 				function() {
-					loadEmployees(parent);
+					loadEmployeesSection(parent);
 				}, function() {
 					document.getElementById("country").addEventListener(
 							"change", getCitySelectList);
@@ -109,7 +115,7 @@ function loadEmployees(parent) {
 
 		container.appendChild(createShowAddFormButton(container, structure,
 				function() {
-					loadEmployees(parent);
+					loadEmployeesSection(parent);
 				}, function() {
 					document.getElementById("country").addEventListener(
 							"change", getCitySelectList);
@@ -123,6 +129,26 @@ function loadEmployees(parent) {
 		frag.appendChild(container);
 		parent.appendChild(frag);
 	});
+}
+
+function loadLeaveManagementSection(parent) {
+	// alert(parent);
+	// display boxs with leave detail
+	// create table with leave history
+
+	// var menu = createLeaveMenuItem();
+
+	dropChildNodes(parent);
+
+	var row = createElement("div", [ "row" ], undefined, undefined);
+	var frag = document.createDocumentFragment();
+	frag.appendChild(row);
+
+	for (i = 0; i < 8; i++) {
+		row.appendChild(createLeaveMenuItem());
+	}
+
+	parent.appendChild(frag);
 }
 
 function dropChildNodes(element) {
@@ -167,4 +193,40 @@ function hideSiblings(element) {
 		if (sibling.nodeType == 1 && sibling != element)
 			sibling.classList.add("hidden");
 
+}
+
+function createLeaveMenuItem(leaveInfo) {
+
+	var col = createElement("div", [ "col" ]);
+	var card = col.appendChild(createElement("div", [ "card" ]));
+
+	card.appendChild(createElement("h2", [], undefined, "Paid"));
+
+	card.appendChild(createElement("label", [], undefined, "Annual"));
+	card.appendChild(createElement("p", [], undefined, "10"));
+
+	card.appendChild(createElement("label", [], undefined, "Used"));
+	card.appendChild(createElement("p", [], undefined, "5"));
+
+	card.appendChild(createElement("label", [], undefined, "Avaliable"));
+	card.appendChild(createElement("p", [], undefined, "5"));
+
+	var button = card.appendChild(createElement("button", [], undefined,
+			"Request"));
+	// add eventlistener to button
+	return col;
+
+}
+
+function createElement(type, classes, id, innerText) {
+	var element = document.createElement(type);
+	var i, length = classes.length;
+	for (i = 0; i < length; i++) {
+		element.classList.add(classes[i]);
+	}
+	if (typeof id !== "undefined")
+		element.id = id;
+	if (typeof innerText !== "undefined")
+		element.innerText = innerText;
+	return element;
 }

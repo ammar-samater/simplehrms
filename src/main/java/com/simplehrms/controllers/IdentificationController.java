@@ -23,29 +23,29 @@ public class IdentificationController {
 	
 
 	@GetMapping(path = "/identifications")
-	public @ResponseBody Iterable<Identification> getAllIdentifications() {
+	public Iterable<Identification> getAllIdentifications() {
 		return identificationRepository.findAll();
 	}
 	
 	@GetMapping(path = "/identifications/{id}")
-	public @ResponseBody Identification getIdentificationById(@PathVariable Long id) {
+	public  Identification getIdentificationById(@PathVariable Long id) {
 		return identificationRepository.findById(id).get();
 	}
 
 	@PostMapping(path = "/identifications")
-	public @ResponseBody String addIdentification(@RequestBody Identification identification) {
+	public String addIdentification(@RequestBody Identification identification) {
 		identificationRepository.save(identification);
 		return "identifications/" + identification.getId();
 	}
 
 	@DeleteMapping(path = "/identifications/{id}")
-	public @ResponseBody void deleteIdentification(@PathVariable Long id) {
+	public  void deleteIdentification(@PathVariable Long id) {
 		identificationRepository.deleteById(id);
 		
 	}
 	
 	@PutMapping(path = "/identifications/{id}")
-	public @ResponseBody String updateIdentification(@RequestBody Identification identification, @PathVariable Long id) {
+	public  String updateIdentification(@RequestBody Identification identification, @PathVariable Long id) {
 		identificationRepository.save(identification);
 		return "/identifications/" +identification.getId();
 	}

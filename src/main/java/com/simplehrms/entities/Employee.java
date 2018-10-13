@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * 
  * @author Ammar Samater
- * @author
  */
 @Entity
 @Table(name = "Employees")

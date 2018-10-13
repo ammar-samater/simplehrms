@@ -46,6 +46,18 @@ public class EmployeePosition implements Serializable {
 	@JoinColumn(name = "position_id")
 	private Position position;
 
+	@Column(name = "paid_days")
+	private int annualPaidVacationDays;
+
+	@Column(name = "sick_days")
+	private int annualSickVacationDays;
+
+	@Column(name = "emergency_days")
+	private int annualEmergencyVacationDays;
+
+	@Column(name = "unpaid_days")
+	private int annualUnpaidVacationDays;
+
 	/**
 	 * 
 	 */
@@ -54,25 +66,35 @@ public class EmployeePosition implements Serializable {
 	}
 
 	/**
+	 * @param id
 	 * @param positionControlNumber
 	 * @param startDate
 	 * @param endDate
 	 * @param commissionPct
 	 * @param salary
 	 * @param manager
-	 * @param employee
 	 * @param position
+	 * @param annualPaidVacationDays
+	 * @param annualSickVacationDays
+	 * @param annualEmergencyVacationDays
+	 * @param annualUnpaidVacationDays
 	 */
-	public EmployeePosition(String positionControlNumber, Date startDate, Date endDate, BigDecimal commissionPct,
-			BigDecimal salary, Employee manager, Position position) {
+	public EmployeePosition(Long id, String positionControlNumber, Date startDate, Date endDate,
+			BigDecimal commissionPct, BigDecimal salary, Employee manager, Position position,
+			int annualPaidVacationDays, int annualSickVacationDays, int annualEmergencyVacationDays,
+			int annualUnpaidVacationDays) {
+		this.id = id;
 		this.positionControlNumber = positionControlNumber;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.commissionPct = commissionPct;
 		this.salary = salary;
 		this.manager = manager;
-
 		this.position = position;
+		this.annualPaidVacationDays = annualPaidVacationDays;
+		this.annualSickVacationDays = annualSickVacationDays;
+		this.annualEmergencyVacationDays = annualEmergencyVacationDays;
+		this.annualUnpaidVacationDays = annualUnpaidVacationDays;
 	}
 
 	/**
@@ -193,6 +215,66 @@ public class EmployeePosition implements Serializable {
 	 */
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+
+	/**
+	 * @return the annualPaidVacationDays
+	 */
+	public int getAnnualPaidVacationDays() {
+		return annualPaidVacationDays;
+	}
+
+	/**
+	 * @param annualPaidVacationDays
+	 *            the annualPaidVacationDays to set
+	 */
+	public void setAnnualPaidVacationDays(int annualPaidVacationDays) {
+		this.annualPaidVacationDays = annualPaidVacationDays;
+	}
+
+	/**
+	 * @return the annualSickVacationDays
+	 */
+	public int getAnnualSickVacationDays() {
+		return annualSickVacationDays;
+	}
+
+	/**
+	 * @param annualSickVacationDays
+	 *            the annualSickVacationDays to set
+	 */
+	public void setAnnualSickVacationDays(int annualSickVacationDays) {
+		this.annualSickVacationDays = annualSickVacationDays;
+	}
+
+	/**
+	 * @return the annualEmergencyVacationDays
+	 */
+	public int getAnnualEmergencyVacationDays() {
+		return annualEmergencyVacationDays;
+	}
+
+	/**
+	 * @param annualEmergencyVacationDays
+	 *            the annualEmergencyVacationDays to set
+	 */
+	public void setAnnualEmergencyVacationDays(int annualEmergencyVacationDays) {
+		this.annualEmergencyVacationDays = annualEmergencyVacationDays;
+	}
+
+	/**
+	 * @return the annualUnpaidVacationDays
+	 */
+	public int getAnnualUnpaidVacationDays() {
+		return annualUnpaidVacationDays;
+	}
+
+	/**
+	 * @param annualUnpaidVacationDays
+	 *            the annualUnpaidVacationDays to set
+	 */
+	public void setAnnualUnpaidVacationDays(int annualUnpaidVacationDays) {
+		this.annualUnpaidVacationDays = annualUnpaidVacationDays;
 	}
 
 	/**

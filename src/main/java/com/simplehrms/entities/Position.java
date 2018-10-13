@@ -17,7 +17,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -35,7 +34,7 @@ public class Position implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
-	private int id;
+	private Long id;
 
 	private String title;
 
@@ -85,7 +84,7 @@ public class Position implements Serializable {
 	 * @param competencies
 	 * @param department
 	 */
-	public Position(int id, String title, String titleLang2, String description, String descriptionLang2,
+	public Position(Long id, String title, String titleLang2, String description, String descriptionLang2,
 			BigDecimal minSalary, BigDecimal maxSalary, List<String> requiredQualifications,
 			double requiredYearsOfExperience, List<Competence> competencies, Department department) {
 		this.id = id;
@@ -104,7 +103,7 @@ public class Position implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -112,7 +111,7 @@ public class Position implements Serializable {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -282,7 +281,7 @@ public class Position implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -300,7 +299,10 @@ public class Position implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Position other = (Position) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

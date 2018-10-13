@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @RestController
@@ -23,29 +22,29 @@ public class AddressController {
 	
 
 	@GetMapping(path = "/addresses")
-	public @ResponseBody Iterable<Address> getAllAddresses() {
+	public Iterable<Address> getAllAddresses() {
 		return addressRepository.findAll();
 	}
 	
 	@GetMapping(path = "/addresses/{id}")
-	public @ResponseBody Address getAddressById(@PathVariable Long id) {
+	public  Address getAddressById(@PathVariable Long id) {
 		return addressRepository.findById(id).get();
 	}
 
 	@PostMapping(path = "/addresses")
-	public @ResponseBody String addAddress(@RequestBody Address address) {
+	public  String addAddress(@RequestBody Address address) {
 		addressRepository.save(address);
 		return "departments/" + address.getId();
 	}
 
 	@DeleteMapping(path = "/addresses/{id}")
-	public @ResponseBody void deleteAddress(@PathVariable Long id) {
+	public void deleteAddress(@PathVariable Long id) {
 		addressRepository.deleteById(id);
 		
 	}
 	
 	@PutMapping(path = "/addresses/{id}")
-	public @ResponseBody String updateAddress(@RequestBody Address address, @PathVariable Long id) {
+	public String updateAddress(@RequestBody Address address, @PathVariable Long id) {
 		addressRepository.save(address);
 		return "/addresses/" +address.getId();
 	}

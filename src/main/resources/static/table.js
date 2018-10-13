@@ -27,10 +27,16 @@ function createTable(parent, data, id, structure, reload, addEventListeners) {
 		th.addEventListener('click', sortFunction);
 	}
 
-	var isEditable = !(typeof structure.options.update === "undefined");
+/*	var isEditable = !(typeof structure.options.update === "undefined");
 	var isDeletable = !(typeof structure.options.deleteURL === "undefined");
+	var isUnDetailed = !(typeof structure.options.details === "undifined");*/
+	
+	var isEditable = structure.options.hasOwnProperty('update');
+	var isDeletable = structure.options.hasOwnProperty('deleteURL');
+	var isUnDetailed = structure.options.hasOwnProperty('details');
+	
 	// add options column
-	if (isEditable || isDeletable) {
+	if (isEditable || isDeletable || isUnDetailed) {
 		th = document.createElement('th');
 		th.innerText = "Options";
 		tr.appendChild(th);
@@ -54,12 +60,16 @@ function createTable(parent, data, id, structure, reload, addEventListeners) {
 			tr.appendChild(td);
 		}
 
-		if (isEditable || isDeletable) {
+		td = document.createElement('td');
 
+		if (isEditable || isDeletable || isUnDetailed) {
+		
 			if (isEditable) {
 				var icon1 = createOptionIcon("editIcon", [ "fa", "fa-edit" ]);
 				icon1.addEventListener('click', createShowUpdateFormFunction(
-						parent, structure, data[i].id, reload, addEventListeners));
+						parent, structure, data[i].id, reload,
+						addEventListeners));
+				td.appendChild(icon1);
 			}
 
 			if (isDeletable) {
@@ -70,11 +80,17 @@ function createTable(parent, data, id, structure, reload, addEventListeners) {
 							// loadDepartments(parent);
 							reload();
 						}));
+				td.appendChild(icon2);
 			}
 
-			td = document.createElement('td');
-			td.appendChild(icon1);
-			td.appendChild(icon2);
+			if (isUnDetailed) {
+				var icon3 = createOptionIcon("detailIcon", [ "fa",
+						"fa-info-circle" ]);
+				icon3.addEventListener('click', createShowDetailPageFunction(
+						parent, structure, data[i].id));
+				td.appendChild(icon3);
+			}
+
 			tr.appendChild(td);
 		}
 
@@ -90,7 +106,8 @@ function createTable(parent, data, id, structure, reload, addEventListeners) {
  * @param id
  * @returns
  */
-function createShowUpdateFormFunction(parent, structure, id, reload, callback) {
+function createShowUpdateFormFunction(parent, structure, id, reload,
+		addEventListeners) {
 	return function() {
 		getViewSection(parent, structure.options.update.updateForm.replace(
 				"/id", "/" + id), function() {
@@ -102,9 +119,16 @@ function createShowUpdateFormFunction(parent, structure, id, reload, callback) {
 					reload();
 				});
 			});
-			if (typeof callback === "function")
-				callback();
+			if (typeof addEventListeners === "function")
+				addEventListeners();
 		});
+	};
+}
+
+function createShowDetailPageFunction(parent, structure, id) {
+	return function() {
+		getViewSection(parent, structure.options.details.replace("/id", "/"
+				+ id));
 	};
 }
 
