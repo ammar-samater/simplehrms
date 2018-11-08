@@ -17,28 +17,28 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Comptencies")
-@NamedQuery(name = "Competence.findAll", query = "SELECT c FROM Competence c")
-public class Competence {
-	
+@NamedQuery(name = "Competency.findAll", query = "SELECT c FROM Competency c")
+public class Competency {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
-	private int id;
-	
+	private Long id;
+
 	private String name;
-	
+
 	@Column(name = "name_lang2")
 	private String nameLang2;
-	
+
 	private String description;
-	
+
 	@Column(name = "description_lang2")
 	private String descriptionLang2;
 
 	/**
 	 * 
 	 */
-	public Competence() {
+	public Competency() {
 		super();
 	}
 
@@ -49,7 +49,7 @@ public class Competence {
 	 * @param description
 	 * @param descriptionLang2
 	 */
-	public Competence(int id, String name, String nameLang2, String description, String descriptionLang2) {
+	public Competency(Long id, String name, String nameLang2, String description, String descriptionLang2) {
 		this.id = id;
 		this.name = name;
 		this.nameLang2 = nameLang2;
@@ -60,14 +60,15 @@ public class Competence {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -79,7 +80,8 @@ public class Competence {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -93,7 +95,8 @@ public class Competence {
 	}
 
 	/**
-	 * @param nameLang2 the nameLang2 to set
+	 * @param nameLang2
+	 *            the nameLang2 to set
 	 */
 	public void setNameLang2(String nameLang2) {
 		this.nameLang2 = nameLang2;
@@ -107,7 +110,8 @@ public class Competence {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -121,24 +125,29 @@ public class Competence {
 	}
 
 	/**
-	 * @param descriptionLang2 the descriptionLang2 to set
+	 * @param descriptionLang2
+	 *            the descriptionLang2 to set
 	 */
 	public void setDescriptionLang2(String descriptionLang2) {
 		this.descriptionLang2 = descriptionLang2;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -149,13 +158,18 @@ public class Competence {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Competence other = (Competence) obj;
-		if (id != other.id)
+		Competency other = (Competency) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -163,9 +177,5 @@ public class Competence {
 		return "Competence [id=" + id + ", name=" + name + ", nameLang2=" + nameLang2 + ", description=" + description
 				+ ", descriptionLang2=" + descriptionLang2 + "]";
 	}
-	
-	
-	
-	
 
 }

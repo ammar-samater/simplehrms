@@ -3,6 +3,9 @@ package com.simplehrms.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.simplehrms.jsonview.View;
+
 /**
  * The persistent class for the department database table.
  * 
@@ -18,13 +21,17 @@ public class Department implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
+	@JsonView(View.Summary.class)
 	private Long id;
 
 	@Column(name = "department_id", unique = true)
+	@JsonView(View.Summary.class)
 	private String departmentId;
 
+	@JsonView(View.Summary.class)
 	private String name;
 
+	@JsonView(View.Summary.class)
 	private String nameLang2;
 
 	@Column(name = "office_number")

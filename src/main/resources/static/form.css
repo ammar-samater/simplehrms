@@ -1,14 +1,82 @@
 @charset "UTF-8";
 
-* {
-	box-sizing: border-box;
-}
-
-form input[type=text], input[type=date], select, textarea {
+form input[type=text], input[type=date], input[type=number], select,
+	textarea, .auto-complete-select {
 	width: 100%;
 	padding: 12px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+}
+
+.multiSelectContainer {
+	display: inline-block;
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: white;
+}
+
+.multiSelectContainer span, input {
+	display: inline-block;
+}
+
+.multiSelectInput {
+	padding: 0px !important;
+	border: 0px !important;
+}
+
+.multiSelectInput:focus {
+	outline: none !important;
+}
+
+.tagRenderedElement {
+	background-color: #e8f9f8;
+	margin: 0px 2px 2px 2px;
+	padding: 6px;
+	border-radius: 4px;
+}
+
+.closeTag {
+	cursor: pointer;
+	padding: 0px 0px 8px 8px;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.auto-complete-select {
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	background-color: white;
+	background-color: -moz-field;
+	font: -moz-field;
+	font: -webkit-small-control;
+	display: inline-block;
+	margin: 0px;
+}
+
+.auto-complete-select-dropdown {
+	background-color: white;
+}
+
+.auto-complete-select-dropdown {
+	padding: 12px 15px;
+	font: -webkit-small-control;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	outline: none;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	display: none;
+}
+
+.auto-complete-select-dropdown p:hover {
+	background-color: #00f;
 }
 
 label {
@@ -114,7 +182,6 @@ input[type=submit]:active {
 	label {
 		margin-top: 16px;
 	}
-	
 	.row {
 		margin-top: 0px;
 	}

@@ -33,50 +33,13 @@
 			<div class="col-75">
 				<select id="site_name" name="site.id">
 					<option value="" disabled selected>Select the site</option>
-					<option th:each="site : ${sites}" th:value="${site.id}"
-						th:utext="${site.name}" />
+					<option th:each="site : ${sites}" th:value="${site.id}" th:utext="${site.name}" />
 				</select>
 			</div>
 		</div>
-		<!-- 	<div class="row">
-			<div class="col-25">
-				<label for="building_name">Building Name</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="building_name" name="buildingName">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-25">
-				<label for="lname">Floor Number</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="lname" name="lastname">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-25">
-				<label for="lname">Office Number</label>
-			</div>
-			<div class="col-75">
-				<input type="text" id="lname" name="lastname">
-			</div>
-		</div> -->
 		<div class="row">
 			<input type="submit" value="Submit">
 		</div>
 	</form>
 </div>
 </html>
-<!-- {
-      "departmentId": "DEP6",
-      "name": null,
-      "nameLang2": null,
-      "officeNumber": "",
-      "floorNumber": null,
-      "buildingName": "Building 10",
-      "site": {
-      	"id": 25
-      }
-   }
- -->

@@ -19,6 +19,19 @@ function handleFormSubmit(parent, callback) {
 			}
 		}
 	}
+	
+	var msinputs = document.getElementsByClassName("multiSelectContainer");
+
+	var j, l2 = msinputs.length;
+	for (j = 0; j < l2; j++) {
+		var getGlobalSelectedItemsObject = Function("return "+msinputs[j].id);
+		var selectedItems = getGlobalSelectedItemsObject();
+		setValue(obj, msinputs[j].id, selectedItems);
+		//alert(JSON.stringify(selectedItems));
+	/*	if (input[j].classList.containes("tagRenderedElement"))
+			setValue(obj, input[j].id, input[j].id.substring(1,
+					id.length - 1));*/
+	}
 
 	// construct an HTTP request
 	var xhr = new XMLHttpRequest();
@@ -76,4 +89,88 @@ function getCitySelectList() {
 
 	});
 
+}
+
+function filterCompetencies() {
+	// get competencies list
+	var competencyOptions = document
+			.getElementById("requiredCompetenciesOptions");
+
+	var competencies = competencyOptions.children;
+
+	// get user input
+	var requiredCompetenciesInput = document
+			.getElementById("competenciesMultiSelect");
+	var filter = requiredCompetenciesInput.value.toUpperCase();
+
+	// create filtered list <p id= "competencies[i].id">
+	var i, p, l = competencies.length;
+	var found = false;
+
+	for (i = 0; i < l; i++) {
+		if (competencies[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+			competencies[i].style.display = "";
+			found = true;
+			/*
+			 * p = document.createElement('p'); p.id = competencies[i].id;
+			 * p.innerHTML = competencies[i].name;
+			 * competencyOptions.appendChild(p);
+			 */
+		} else {
+			competencies[i].style.display = "none";
+		}
+	}
+
+	if (found == true) {
+		competencyOptions.style.display = "block";
+	} else {
+		competencyOptions.style.display = "none";
+	}
+	// display filtered list
+
+	// find selected items and set them as selected ///////////////////////
+
+}
+
+function hideDropdown() {
+	var element = document.getElementById("requiredCompetenciesOptions");
+	if (element.style.display != "none")
+		element.style.display = "none";
+}
+
+function addSelectedCompetency(event) {
+	var selected = event.target;
+	addCompetency(selected.textContent.trim(), selected.id);
+	// add item id to selected object
+}
+
+function addCompetency(value, id) {
+	var span = document.createElement('span');
+	span.id = id + "d";
+	span.classList.add("tagRenderedElement");
+	span.innerHTML = value + "<span class='closeTag' onclick='closeTag(\"" + id
+			+ "d\")'>&times;</span>";
+	// add closing span to span, and add event listener to remove tag
+	var div = document.getElementById("competencies");
+	var input = document.getElementById("competenciesMultiSelect");
+	input.value = "";
+	div.insertBefore(span, input);
+	hideDropdown();
+	// add item id to selected object
+	window.competencies.push({"id" : parseInt(id)});
+}
+
+function closeTag(id) {
+	var element = document.getElementById(id);
+	element.parentNode.removeChild(element);
+	removeCompetency(id.substring(1, id.length - 1));
+}
+
+function removeCompetency(id) {
+	var i, l = window.competencies.length;
+	for (i = 0; i < l; i++) {
+		if (window.competencies[i].id === id) {
+			window.competencies.splice(i, 1);
+		}
+	}
 }

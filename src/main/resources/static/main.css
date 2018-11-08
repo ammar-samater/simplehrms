@@ -122,7 +122,7 @@ body {
 }
 
 .card h2 {
-	
+	height: 57px;
 }
 
 .card p {
@@ -162,3 +162,4 @@ button:active {
 	background-color: #0098BB;
 	transform: translateY(1px);
 }
+

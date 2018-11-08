@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +18,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.simplehrms.jsonview.View;
 
 /**
  * The persistent class for the position database table.
@@ -34,38 +37,48 @@ public class Position implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
+	@JsonView(View.Summary.class)
 	private Long id;
 
+	@JsonView(View.Summary.class)
 	private String title;
 
 	@Column(name = "title_Lang2")
+	@JsonView(View.Summary.class)
 	private String titleLang2;
 
+	@JsonView(View.Summary.class)
 	private String description;
 
 	@Column(name = "description_Lang2")
+	@JsonView(View.Summary.class)
 	private String descriptionLang2;
 
 	@Column(name = "min_salary")
+	@JsonView(View.Summary.class)
 	private BigDecimal minSalary;
 
 	@Column(name = "max_salary")
+	@JsonView(View.Summary.class)
 	private BigDecimal maxSalary;
 
-	@ElementCollection
-	@CollectionTable(name = "qualifications", joinColumns = @JoinColumn(name = "position_id"))
-	@Column(name = "required_qualifications")
-	private List<String> requiredQualifications;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "req_ed_level")
+	@JsonView(View.Summary.class)
+	private Education requiredEducationLevel;
 
 	@Column(name = "req_yrs_exp")
+	@JsonView(View.Summary.class)
 	private double requiredYearsOfExperience;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = { CascadeType.MERGE })
 	@JoinTable(name = "positions_competencies", joinColumns = @JoinColumn(name = "position_id"), inverseJoinColumns = @JoinColumn(name = "Competence_id"))
-	private List<Competence> competencies;
+	@JsonView(View.Full.class)
+	private List<Competency> competencies;
 
-	@ManyToOne
-	@JoinColumn(name = "department_id")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "department_id", nullable = false)
+	@JsonView(View.Summary.class)
 	private Department department;
 
 	public Position() {
@@ -86,7 +99,7 @@ public class Position implements Serializable {
 	 */
 	public Position(Long id, String title, String titleLang2, String description, String descriptionLang2,
 			BigDecimal minSalary, BigDecimal maxSalary, List<String> requiredQualifications,
-			double requiredYearsOfExperience, List<Competence> competencies, Department department) {
+			double requiredYearsOfExperience, List<Competency> competencies, Department department) {
 		this.id = id;
 		this.title = title;
 		this.titleLang2 = titleLang2;
@@ -94,7 +107,7 @@ public class Position implements Serializable {
 		this.descriptionLang2 = descriptionLang2;
 		this.minSalary = minSalary;
 		this.maxSalary = maxSalary;
-		this.requiredQualifications = requiredQualifications;
+
 		this.requiredYearsOfExperience = requiredYearsOfExperience;
 		this.competencies = competencies;
 		this.department = department;
@@ -206,21 +219,6 @@ public class Position implements Serializable {
 	}
 
 	/**
-	 * @return the requiredQualifications
-	 */
-	public List<String> getRequiredQualifications() {
-		return requiredQualifications;
-	}
-
-	/**
-	 * @param requiredQualifications
-	 *            the requiredQualifications to set
-	 */
-	public void setRequiredQualifications(List<String> requiredQualifications) {
-		this.requiredQualifications = requiredQualifications;
-	}
-
-	/**
 	 * @return the requiredYearsOfExperience
 	 */
 	public double getRequiredYearsOfExperience() {
@@ -236,9 +234,24 @@ public class Position implements Serializable {
 	}
 
 	/**
+	 * @return the requiredEducationLevel
+	 */
+	public Education getRequiredEducationLevel() {
+		return requiredEducationLevel;
+	}
+
+	/**
+	 * @param requiredEducationLevel
+	 *            the requiredEducationLevel to set
+	 */
+	public void setRequiredEducationLevel(Education requiredEducationLevel) {
+		this.requiredEducationLevel = requiredEducationLevel;
+	}
+
+	/**
 	 * @return the competencies
 	 */
-	public List<Competence> getCompetencies() {
+	public List<Competency> getCompetencies() {
 		return competencies;
 	}
 
@@ -246,7 +259,7 @@ public class Position implements Serializable {
 	 * @param competencies
 	 *            the competencies to set
 	 */
-	public void setCompetencies(List<Competence> competencies) {
+	public void setCompetencies(List<Competency> competencies) {
 		this.competencies = competencies;
 	}
 
@@ -315,9 +328,7 @@ public class Position implements Serializable {
 	@Override
 	public String toString() {
 		return "Position [id=" + id + ", title=" + title + ", titleLang2=" + titleLang2 + ", description=" + description
-				+ ", descriptionLang2=" + descriptionLang2 + ", minSalary=" + minSalary + ", maxSalary=" + maxSalary
-				+ ", requiredQualifications=" + requiredQualifications + ", requiredYearsOfExperience="
-				+ requiredYearsOfExperience + ", competencies=" + competencies + ", department=" + department + "]";
+				+ ", descriptionLang2=" + descriptionLang2 + "]";
 	}
 
 }

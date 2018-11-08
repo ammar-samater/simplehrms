@@ -27,14 +27,10 @@ function createTable(parent, data, id, structure, reload, addEventListeners) {
 		th.addEventListener('click', sortFunction);
 	}
 
-/*	var isEditable = !(typeof structure.options.update === "undefined");
-	var isDeletable = !(typeof structure.options.deleteURL === "undefined");
-	var isUnDetailed = !(typeof structure.options.details === "undifined");*/
-	
 	var isEditable = structure.options.hasOwnProperty('update');
 	var isDeletable = structure.options.hasOwnProperty('deleteURL');
 	var isUnDetailed = structure.options.hasOwnProperty('details');
-	
+
 	// add options column
 	if (isEditable || isDeletable || isUnDetailed) {
 		th = document.createElement('th');
@@ -63,7 +59,7 @@ function createTable(parent, data, id, structure, reload, addEventListeners) {
 		td = document.createElement('td');
 
 		if (isEditable || isDeletable || isUnDetailed) {
-		
+
 			if (isEditable) {
 				var icon1 = createOptionIcon("editIcon", [ "fa", "fa-edit" ]);
 				icon1.addEventListener('click', createShowUpdateFormFunction(

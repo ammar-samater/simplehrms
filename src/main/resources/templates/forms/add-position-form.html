@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container">
+	<form action="/positions" method="post">
+		<div class="row">
+			<div>
+				<div class="col-15">
+					<label for=title>Title</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="title" name="title" required>
+				</div>
+			</div>
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="title_Lang2">المسمى</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="title_Lang2" name="titleLang2">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div>
+				<div class="col-15">
+					<label for="description">Description</label>
+				</div>
+				<div class="col-35">
+					<input type="text" id="description" name="description">
+				</div>
+			</div>
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="description_Lang2">الوصف</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="text" id="description_Lang2" name="descriptionLang2">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div>
+				<div class="col-15">
+					<label for="min_salary">Minimum Salary</label>
+				</div>
+				<div class="col-35">
+					<input type="number" id="min_salary" name="minSalary" required>
+				</div>
+			</div>
+			<div dir="rtl">
+				<div class="col-15-rt">
+					<label for="max_salary">Maximum Salary</label>
+				</div>
+				<div class="col-35-rt">
+					<input type="number" id="max_salary" name="maxSalary">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
+				<label for="req_ed_level">Minimum Education Level</label>
+			</div>
+			<div class="col-35">
+				<select id="req_ed_level" name="requiredEducationLevel" required>
+					<option value="" disabled selected>Select required education level</option>
+					<option th:each="education : ${T(com.simplehrms.entities.Education).values()}"
+						th:value="${education}" th:text="${education.displayName}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-15">
+				<label for="req_yrs_exp">Required Years Of Experience</label>
+			</div>
+			<div class="col-35">
+				<input type="number" id="req_yrs_exp" name="requiredYearsOfExperience">
+			</div>
+		</div>
+		<!-- 		<div class="row">
+			<div class="col-15">
+				<label for="required_qualifications">required_qualifications</label>
+			</div>
+			<div class="col-35">
+				<input type="text" id="req_yrs_exp" name="requiredYearsOfExperience">
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-15">
+				<label for="requiredCompetencies">Required Competencies</label>
+			</div>
+			<div class="col-35">
+				<!-- 				<select id="req_comp" name="competencies" multiple>
+					<option value="" disabled selected>Select required competencies</option>
+					<option th:each="competency : ${competencies}" th:value="${competency.id}" th:text="${competency.name}"></option>
+				</select> -->
+<!-- 				<div id="selectedCompetencies">
+					<p id="requiredCompetencies" class="auto-complete-select"
+						contenteditable="true">Select required competencies</p>
+				</div> -->
+				<div id="competencies" class="multiSelectContainer">
+					<input type="text" id="competenciesMultiSelect" class="multiSelectInput">
+				</div>
+				<div id="requiredCompetenciesOptions" class="auto-complete-select-dropdown">
+					<p th:each="competency : ${competencies}" th:id="${competency.id}"
+						th:text="${competency.name}"></p> 
+				</div>
+			</div>
+		</div>
+		<!-- 		<div class="row">
+			<div class="col-25">
+				<label for="gender">Gender</label>
+				<input type="radio" name="gender" value="Male">
+				Male <br>
+				<input type="radio" name="gender" value="Female">
+				Female <br>
+				<input type="radio" name="gender" value="Other">
+				Other <br>
+			</div>
+			<div class="col-25">
+				<label for="martialStatus">Martial Status</label>
+				<input type="radio" name="martialStatus" value="SINGLE">
+				Single <br>
+				<input type="radio" name="martialStatus" value="MARRIED">
+				Married <br>
+				<input type="radio" name="martialStatus" value="OTHER">
+				Other <br>
+			</div>
+			<div class="col-25">
+				<label for="religion">Religion</label>
+				<input type="radio" name="religion" value="ISLAM">
+				Islam <br>
+				<input type="radio" name="religion" value="CHRISTIANITY">
+				Christianity <br>
+				<input type="radio" name="religion" value="JUDAISM">
+				Judaism <br>
+				<input type="radio" name="religion" value="OTHER">
+				Other <br>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-15">
+				<label for="department">Department</label>
+			</div>
+			<div class="col-35">
+				<select id="department" name="department.id" required>
+					<option value="" disabled selected>Select department</option>
+					<option th:each="department : ${departments}" th:value="${department.id}"
+						th:utext="${department.departmentId}" />
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<input type="submit" value="Submit">
+		</div>
+	</form>
+</div>
+<!-- <script th:inline="javascript">
+	/*<![CDATA[*/
+
+	var competencies = /*[[${competencies}]]*/'default';
+
+
+	/*]]>*/
+</script> -->
+</html>

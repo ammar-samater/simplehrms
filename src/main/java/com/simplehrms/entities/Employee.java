@@ -1,9 +1,14 @@
 package com.simplehrms.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,6 +26,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.simplehrms.jsonview.View;
 
 /**
  * The persistent class for the employee database table.
@@ -35,36 +44,46 @@ public class Employee implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
+	@JsonView(View.Summary.class)
 	private Long id;
 
 	@Column(name = "employee_Number", unique = true)
+	@JsonView(View.Summary.class)
 	private String employeeNumber;
 
 	@Column(name = "first_name")
+	@JsonView(View.Summary.class)
 	private String firstName;
 
 	@Column(name = "mid_name")
+
 	private String midName;
 
 	@Column(name = "last_name")
+	@JsonView(View.Summary.class)
 	private String lastName;
 
 	@Column(name = "first_name_lang2")
+	@JsonView(View.Summary.class)
 	private String firstNameLang2;
 
 	@Column(name = "mid_name_lang2")
+
 	private String midNameLang2;
 
 	@Column(name = "last_name_lang2")
+	@JsonView(View.Summary.class)
 	private String lastNameLang2;
 
 	@Column(name = "preferred_name")
+	
 	private String preferredName;
 
 	@Column(name = "preferred_name_lang2")
 	private String preferredNameLang2;
 
 	@Temporal(TemporalType.DATE)
+	@JsonView(View.Summary.class)
 	private Date dob;
 
 	@Enumerated(EnumType.STRING)
@@ -72,6 +91,7 @@ public class Employee implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "hire_date")
+	@JsonView(View.Summary.class)
 	private Date hireDate;
 
 	@Enumerated(EnumType.STRING)
@@ -80,6 +100,16 @@ public class Employee implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private Religion religion;
+	
+	@ElementCollection
+	@CollectionTable(name="EMPLOYEE_EDUCATION")
+	@JsonView(View.Full.class)
+	private Collection<Education> educationLevel;
+	
+	@ManyToMany(cascade = { CascadeType.MERGE })
+	@JoinTable(name = "positions_competencies", joinColumns = @JoinColumn(name = "position_id"), inverseJoinColumns = @JoinColumn(name = "Competence_id"))
+	@JsonView(View.Full.class)
+	private List<Competency> competencies;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
@@ -327,6 +357,36 @@ public class Employee implements Serializable {
 	 */
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	
+
+	/**
+	 * @return the educationLevel
+	 */
+	public Collection<Education> getEducationLevel() {
+		return educationLevel;
+	}
+
+	/**
+	 * @param educationLevel the educationLevel to set
+	 */
+	public void setEducationLevel(Collection<Education> educationLevel) {
+		this.educationLevel = educationLevel;
+	}
+
+	/**
+	 * @return the competencies
+	 */
+	public List<Competency> getCompetencies() {
+		return competencies;
+	}
+
+	/**
+	 * @param competencies the competencies to set
+	 */
+	public void setCompetencies(List<Competency> competencies) {
+		this.competencies = competencies;
 	}
 
 	/**

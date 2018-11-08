@@ -4,6 +4,7 @@
 package com.simplehrms.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.simplehrms.entities.Employee;
 import com.simplehrms.exceptions.BadRequestException;
+import com.simplehrms.jsonview.View;
 import com.simplehrms.repositories.EmployeeRepository;
 
 /**
@@ -31,35 +34,31 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-
-
-
+	
+	@JsonView(View.Summary.class)
 	@GetMapping(path = "/employees")
 	public Iterable<Employee> getAllEmployees() {
-
 		return employeeRepository.findAll();
-
 	}
 
 	@GetMapping(path = "/employees/{id}")
+	@Transactional
 	public Employee getEmployeeById(@PathVariable Long id) {
-
-		return employeeRepository.findById(id).get();
+		Employee employee = employeeRepository.findById(id).get();
+		employee.getEducationLevel().size();
+		employee.getCompetencies().size();
+		return employee;
 	}
 
 	@PostMapping(path = "/employees")
 	public String addEmployee(@RequestBody Employee employee) {
-
 		employeeRepository.save(employee);
 		return "employees/" + employee.getId();
-
 	}
 
 	@DeleteMapping(path = "/employees/{id}")
 	public void deleteEmployee(@PathVariable Long id) {
-
 		employeeRepository.deleteById(id);
-
 	}
 
 	@PutMapping(path = "/employees/{id}")
@@ -71,7 +70,6 @@ public class EmployeeController {
 
 		employee = employeeRepository.save(employee);
 		return "/employees/" + employee.getId();
-
 	}
 
 }
