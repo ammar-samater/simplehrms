@@ -4,6 +4,7 @@
 package com.simplehrms.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.simplehrms.entities.Employee;
 import com.simplehrms.exceptions.BadRequestException;
 import com.simplehrms.jsonview.View;
@@ -42,18 +44,27 @@ public class EmployeeController {
 	}
 
 	@GetMapping(path = "/employees/{id}")
+	@JsonView(View.Full.class)
 	@Transactional
 	public Employee getEmployeeById(@PathVariable Long id) {
 		Employee employee = employeeRepository.findById(id).get();
 		employee.getEducationLevel().size();
 		employee.getCompetencies().size();
+		employee.getAddress().getCity().getCountry().getName();
 		return employee;
 	}
 
 	@PostMapping(path = "/employees")
 	public String addEmployee(@RequestBody Employee employee) {
-		employeeRepository.save(employee);
-		return "employees/" + employee.getId();
+		try {
+			employeeRepository.save(employee);
+			return "employees/" + employee.getId();
+		} catch (Exception e) {
+			if(e instanceof MySQLIntegrityConstraintViolationException)
+				throw new HttpMessageNotReadableException("Invalid request paramaters");
+			else 
+				throw new RuntimeException("Unknown Internal Server Error");
+		}
 	}
 
 	@DeleteMapping(path = "/employees/{id}")

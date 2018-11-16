@@ -91,6 +91,10 @@ function getCitySelectList() {
 
 }
 
+/**
+ * 
+ * @returns
+ */
 function filterCompetencies() {
 	// get competencies list
 	var competencyOptions = document

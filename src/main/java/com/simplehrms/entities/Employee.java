@@ -25,7 +25,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.simplehrms.jsonview.View;
 
@@ -81,6 +80,10 @@ public class Employee implements Serializable {
 
 	@Column(name = "preferred_name_lang2")
 	private String preferredNameLang2;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "blood_type")
+	private BloodType bloodType;
 
 	@Temporal(TemporalType.DATE)
 	@JsonView(View.Summary.class)
@@ -113,8 +116,13 @@ public class Employee implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonView(View.Summary.class)
 	private Address address;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "home_con_address_id")
+	@JsonView(View.Summary.class)
+	private Address homeCountryAddress;
 
 	public Employee() {
 	}
@@ -380,6 +388,34 @@ public class Employee implements Serializable {
 	 */
 	public List<Competency> getCompetencies() {
 		return competencies;
+	}
+
+	/**
+	 * @return the bloodType
+	 */
+	public BloodType getBloodType() {
+		return bloodType;
+	}
+
+	/**
+	 * @param bloodType the bloodType to set
+	 */
+	public void setBloodType(BloodType bloodType) {
+		this.bloodType = bloodType;
+	}
+
+	/**
+	 * @return the homeCountryAddress
+	 */
+	public Address getHomeCountryAddress() {
+		return homeCountryAddress;
+	}
+
+	/**
+	 * @param homeCountryAddress the homeCountryAddress to set
+	 */
+	public void setHomeCountryAddress(Address homeCountryAddress) {
+		this.homeCountryAddress = homeCountryAddress;
 	}
 
 	/**

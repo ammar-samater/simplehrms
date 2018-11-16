@@ -48,9 +48,9 @@ function createTable(parent, data, id, structure, reload, addEventListeners) {
 			var func = new Function("return function (obj) {return obj."
 					+ structure.keys[j] + "}")();
 			try {
-				td.innerHTML = func(data[i]);
+				td.textContent = func(data[i]);
 			} catch (e) {
-				td.innerHTML = "";
+				td.textContent = "";
 			}
 
 			tr.appendChild(td);
@@ -136,7 +136,7 @@ function createShowDetailPageFunction(parent, structure, id) {
  */
 function createShowAddFormButton(parent, structure, reload, callback) {
 	var addButton = document.createElement('button');
-	addButton.innerHTML = "Add";
+	addButton.textContent = "Add";
 	addButton.classList.add("add-btn");
 
 	var showAddFormFunction = createShowAddFormFunction(parent, structure,
